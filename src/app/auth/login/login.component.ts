@@ -6,17 +6,34 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { config } from 'rxjs';
 import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 // import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 
 export class LoginComponent {
+
+  SignInOptions = [
+    {
+      image: 'assets/images/authentication/google.svg',
+      name: 'Google'
+    },
+    {
+      image: 'assets/images/authentication/twitter.svg',
+      name: 'Twitter'
+    },
+    {
+      image: 'assets/images/authentication/facebook.svg',
+      name: 'Facebook'
+    }
+  ];
+
   userForm: any;
   isFormVisible: boolean = true;
 

@@ -6,15 +6,32 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
+
+  SignUpOptions = [
+    {
+      image: 'assets/images/authentication/google.svg',
+      name: 'Google'
+    },
+    {
+      image: 'assets/images/authentication/twitter.svg',
+      name: 'Twitter'
+    },
+    {
+      image: 'assets/images/authentication/facebook.svg',
+      name: 'Facebook'
+    }
+  ];
+
   signupForm: any;
   isFormVisible: boolean = true;
 
