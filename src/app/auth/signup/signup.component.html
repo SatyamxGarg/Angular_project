@@ -1,0 +1,60 @@
+<div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="card">
+        <div class="row align-items-center text-center">
+          <div class="col-md-12">
+            <div class="card-body">
+              <img src="../../../assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
+              <h4 class="mb-3 f-w-400">Sign up</h4>
+              <form [formGroup]="signupForm">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-user"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter First Name" id="fname" name="fname" formControlName="fname">
+                @if (signupForm.get('fname')?.hasError('required') && signupForm.get('fname').touched) {
+                    <div style="color:red;margin-left:10px;">First name is required.</div>
+                  }
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-user"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter Last Name" id="lname" name="lname" formControlName="lname">
+                @if (signupForm.get('lname')?.hasError('required') && signupForm.get('lname').touched) {
+                    <div style="color:red;margin-left:10px;">Last name is required.</div>
+                  }
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                </div>
+                <input type="email" class="form-control" placeholder="Email address" id="email" name="email" formControlName="email">
+                @if (signupForm.get('email')?.hasError('required') && signupForm.get('email').touched) {
+                  <div style="color:red;margin-left:10px;">Email is required.</div>
+                }
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Password" id="password" name="password" formControlName="password">
+                @if (signupForm.get('password')?.hasError('required') && signupForm.get('password').touched) {
+                  <div style="color:red;margin-left:10px;">Password is required.</div>
+                }
+              </div>
+              <div class="form-group text-left mt-2">
+                <div class="checkbox checkbox-primary d-inline">
+                  <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
+                  <label for="checkbox-fill-2" class="cr">Send me the <a href="javascript:"> Newsletter</a> weekly.</label>
+                </div>
+              </div> <br>
+              <button (click)="onSignup()" class="btn btn-block btn-primary mb-4 w-100" [disabled]="signupForm.invalid">Signup</button>
+              <p class="mb-2">Already have an account? <a href="../login" class="f-w-400">Signin</a></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
