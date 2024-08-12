@@ -8,15 +8,22 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-end mb-4">
             <h3 class="mb-0"><b>Login</b></h3>
-            <a [routerLink]="['/register']" class="link-primary">Don't have an account?</a>
+            <a [routerLink]="['/signup']" class="link-primary">Don't have an account?</a>
           </div>
+          <form [formGroup]="userForm">
           <div class="form-group mb-3">
             <label class="form-label" for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Address" value="info@codedthemes.com" />
+            <input type="email" class="form-control" id="email" placeholder="Enter Email Address" name="email" formControlName="email"/>
+            @if (userForm.get('email')?.hasError('required') && userForm.get('email').touched) {
+              <div style="color:red;margin-left:10px;">Email is required.</div>
+            }
           </div>
           <div class="form-group mb-3">
             <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" value="123456789" />
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" formControlName="password">
+            @if (userForm.get('password')?.hasError('required') && userForm.get('password').touched) {
+              <div style="color:red;margin-left:10px;">Password is required.</div>
+            }
           </div>
           <div class="d-flex mt-1 justify-content-between">
             <div class="form-check">
@@ -26,8 +33,9 @@
             <h5 class="text-secondary f-w-400"><a href="javascript:">Forgot Password?</a></h5>
           </div>
           <div class="d-grid mt-4">
-            <button type="button" class="btn btn-primary">Login</button>
+            <button type="button" (click)="onSubmit()" class="btn btn-primary" [disabled]="userForm.invalid">Login</button>
           </div>
+          </form>
           <div class="saprator mt-3">
             <span>Login with</span>
           </div>
