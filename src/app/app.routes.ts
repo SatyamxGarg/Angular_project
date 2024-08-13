@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
-import { MyprofileComponent } from './private/myprofile/myprofile.component';
+// import { MyprofileComponent } from './privates/myprofile/myprofile.component';
+import { authGuard } from './guards/auth.guard';
+
 export const routes: Routes = [
     {
         path: 'dashboard',
+        canActivate: [authGuard],
         loadChildren: () => import("./private/private.routes").then(m => m.routes),
+        
     },
     
     {

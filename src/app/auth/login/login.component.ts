@@ -8,7 +8,7 @@ import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 // import { RouterLink } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -40,7 +40,8 @@ export class LoginComponent {
   constructor(
     public formbuilder: FormBuilder,
     private httpService: HttpService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: Router
   ) {
     this.userForm = this.formbuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -64,6 +65,7 @@ export class LoginComponent {
         }
         localStorage.setItem("token", response.data.token)
         this.toastr.success("Logged In Successfully")
+        this.route.navigate(['/dashboard']);
       },
       error: (error) => {
         this.toastr.error(error.error.message)

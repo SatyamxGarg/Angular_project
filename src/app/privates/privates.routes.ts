@@ -1,9 +1,8 @@
 // import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 // import { MyprofileComponent } from './myprofile/myprofile.component';
-// import { AdminComponent } from './layouts/admin-layout/admin-layout.component';
-// import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HeaderComponent } from './header/header.component';
+import { AdminComponent } from './layouts/admin-layout/admin-layout.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -19,13 +18,13 @@ export const routes: Routes = [
 
     {
          path: '',
-         component: HeaderComponent,
-        //  children:[
-        //     {
-        //         path:'',
-        //         component: Component
-        //     }
-        //  ]
+         component: AdminComponent,
+         children:[
+            {
+                path:'',
+                component: DashboardComponent
+            }
+         ]
     },
 
     {
