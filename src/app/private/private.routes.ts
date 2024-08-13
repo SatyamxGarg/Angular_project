@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 // import { AdminComponent } from './layouts/admin-layout/admin-layout.component';
 // import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
+import { PrivateComponent } from './private.component';
 
 export const routes: Routes = [
 
@@ -19,7 +20,7 @@ export const routes: Routes = [
 
     {
          path: '',
-         component: HeaderComponent,
+         component: PrivateComponent,
         //  children:[
         //     {
         //         path:'',

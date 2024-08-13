@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 // Project import
 import { SharedModule } from '../privates/shared/shared.module';
 import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-private',
   standalone: true,
-  imports: [CommonModule, SharedModule,HeaderComponent, RouterModule],
+  imports: [CommonModule, SharedModule, HeaderComponent, RouterModule, SidebarComponent],
+  providers: [SidebarComponent, HeaderComponent],
   templateUrl: './private.component.html',
   styleUrl: './private.component.scss'
 })
