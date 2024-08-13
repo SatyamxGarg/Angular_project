@@ -15,12 +15,6 @@ export const routes: Routes = [
         path:'signup',
         component: SignupComponent
     },
-
-    // {
-    //      path:'auth-change-password',
-    //     component: AuthChangePasswordComponent
-    // },
-
     {
         path:'**',
         redirectTo: 'login'
