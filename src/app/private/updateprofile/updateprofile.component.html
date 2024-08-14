@@ -1,0 +1,76 @@
+<div class="auth-main">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        @if(user){
+            <div class="auth-header">
+              <div class="profile-header d-flex align-items-center mb-4">
+                <img src="../../../assets/images/profile/download.jpeg" alt="Profile Image" class="profile-img">
+                <div class="profile-info ml-3">
+                  <h3 class="mb-0"><b>{{user.user_first_name}} {{user.user_last_name}}</b></h3>
+                  <p class="text-muted" style="margin-left:5px;">{{user.user_email}}</p>
+                </div>
+              </div>
+            </div>
+
+        }
+        @if(user) {
+          <div class="card my-2">
+            <div class="card-body">
+              <!-- Update Profile Form -->
+              <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="firstName">First Name</label>
+                      <input type="text" class="form-control" id="firstName" placeholder="First Name" formControlName="firstName">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="lastName">Last Name</label>
+                      <input type="text" class="form-control" id="lastName" placeholder="Last Name" formControlName="lastName">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="emailAddress">Email Address</label>
+                  <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" formControlName="emailAddress">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="age">Age</label>
+                  <input type="number" class="form-control" id="age" placeholder="Age" formControlName="age">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="gender">Gender</label>
+                  <select class="form-control" id="gender" formControlName="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="phone">Phone</label>
+                  <input type="text" class="form-control" id="phone" placeholder="Phone" formControlName="phone">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="country">Country</label>
+                  <input type="text" class="form-control" id="country" placeholder="Country" formControlName="country">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="state">State</label>
+                  <input type="text" class="form-control" id="state" placeholder="State" formControlName="state">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="city">City</label>
+                  <input type="text" class="form-control" id="city" placeholder="City" formControlName="city">
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary">Update Profile</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  

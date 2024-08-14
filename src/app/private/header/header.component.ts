@@ -37,6 +37,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from '../../privates/shared/components/breadcrumb/breadcrumb.component';
 import { CardComponent } from '../../privates/shared/components/card/card.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -71,7 +72,7 @@ export class HeaderComponent {
   navCollapsedMob;
 
   // Constructor
-  constructor(private iconService: IconService) {
+  constructor(private iconService: IconService,   private route: Router) {
     this.windowWidth = window.innerWidth;
     this.navCollapsedMob = false;
     this.windowWidth = window.innerWidth;
@@ -115,7 +116,10 @@ export class HeaderComponent {
       this.NavCollapse.emit();
     }
   }
-
+logout(){
+  localStorage.removeItem("token");
+  this.route.navigate(['/login']);
+}
   navCollapseMob() {
     if (this.windowWidth < 1025) {
       this.NavCollapsedMob.emit();
