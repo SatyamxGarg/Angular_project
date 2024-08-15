@@ -4,8 +4,8 @@ import { HeaderComponent } from './header/header.component';
 import { PrivateComponent } from './private.component';
 import { MyprofileComponent } from './my-profile/myprofile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UpdateprofileComponent } from './update-profile/updateprofile.component';
 import { ChangePasswordComponent } from './change-password/changepassword.component';
+import { UpdateProfileComponent } from './update-profile/updateprofile.component';
 
 export const routes: Routes = [
 
@@ -20,7 +20,7 @@ export const routes: Routes = [
             
             {
                 path: 'update-profile',
-                component: UpdateprofileComponent
+                component: UpdateProfileComponent
                 
             },
             {

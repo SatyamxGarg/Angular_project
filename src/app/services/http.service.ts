@@ -25,5 +25,14 @@ export class HttpService {
    changePassword(body:any){
     return this.http.put("http://localhost/Angular_crud/em_be/api/v1/changepassword/",body); 
    }
+   country(){
+    return this.http.get("http://localhost/Angular_crud/em_be/api/v1/country/"); 
+   }
+   state(body:any){
+    return this.http.post("http://localhost/Angular_crud/em_be/api/v1/state/",body); 
+   }
+   city(body:any){
+    return this.http.post("http://localhost/Angular_crud/em_be/api/v1/city/",body); 
+   }
 }
 
