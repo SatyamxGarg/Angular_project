@@ -5,11 +5,12 @@ import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-updateprofile',
   standalone: true,
-  imports:[ReactiveFormsModule],
+  imports:[ReactiveFormsModule,RouterLink],
   templateUrl: './updateprofile.component.html',
   styleUrls: ['./updateprofile.component.scss']
 })
@@ -73,7 +74,7 @@ export class UpdateprofileComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-
+ 
   onSubmit() {
     if (this.updateProfileForm.invalid) {
       this.toastr.error('Please fill out the form correctly.');

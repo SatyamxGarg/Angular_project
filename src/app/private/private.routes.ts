@@ -5,6 +5,7 @@ import { PrivateComponent } from './private.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+import { ChangePasswordComponent } from './changepassword/changepassword.component';
 
 export const routes: Routes = [
 
@@ -24,6 +25,11 @@ export const routes: Routes = [
             {
                 path: 'updateprofile',
                 component: UpdateprofileComponent
+                
+            },
+            {
+                path: 'changepassword',
+                component: ChangePasswordComponent
                 
             },
            

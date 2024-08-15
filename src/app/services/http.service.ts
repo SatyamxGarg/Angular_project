@@ -22,5 +22,8 @@ export class HttpService {
    updateUserProfile(body:any){
     return this.http.put("http://localhost/Angular_crud/em_be/api/v1/edit-users/",body); 
    }
+   changePassword(body:any){
+    return this.http.put("http://localhost/Angular_crud/em_be/api/v1/changepassword/",body); 
+   }
 }
 
