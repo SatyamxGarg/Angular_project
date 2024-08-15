@@ -62,12 +62,12 @@ export class UpdateprofileComponent implements OnInit {
             });
           } else {
             this.toastr.error(response.message);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/profile']);
           }
         },
         error: (error) => {
           this.toastr.error(error.error.message);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/profile']);
         }
       });
     } else {

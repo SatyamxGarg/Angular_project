@@ -128,12 +128,18 @@ logout(){
   profile = [
     {
       icon: 'edit',
-      title: 'Edit Profile'
+      title: 'Edit Profile',
+      url:'/profile/update-profile'
     },
     {
       icon: 'user',
       title: 'View Profile',
-      url:'/dashboard/profile'
+      url:'/profile'
+    },
+    {
+      icon: 'lock',
+      title: 'Change Password',
+      url:'/profile/change-password'
     },
  
     {

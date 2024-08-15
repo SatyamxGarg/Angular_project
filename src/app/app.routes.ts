@@ -5,7 +5,7 @@ import { noauthGuard } from './guards/noauth.guard';
 
 export const routes: Routes = [
     {
-        path: 'dashboard',
+        path: 'profile',
         canActivate: [authGuard],
         loadChildren: () => import("./private/private.routes").then(m => m.routes),
         

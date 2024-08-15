@@ -64,7 +64,7 @@ export class ChangePasswordComponent implements OnInit {
           return;
         }
         this.toastr.success('Password changed successfully');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/profile']);
       },
       error: (error) => {
         this.toastr.error(error.error.message);

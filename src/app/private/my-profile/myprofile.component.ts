@@ -33,12 +33,12 @@ export class MyprofileComponent implements OnInit {
             this.user = response.data[0];
           } else {
             this.toastr.error(response.message);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/profile']);
           }
         },
         error: (error) => {
           this.toastr.error(error.error.message);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/profile']);
         }
       });
     } else {

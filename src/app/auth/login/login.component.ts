@@ -65,7 +65,7 @@ export class LoginComponent {
         }
         localStorage.setItem("token", response.data.token)
         this.toastr.success("Logged In Successfully")
-        this.route.navigate(['/dashboard']);
+        this.route.navigate(['/profile']);
       },
       error: (error) => {
         this.toastr.error(error.error.message)
