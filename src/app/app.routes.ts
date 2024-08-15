@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 // import { MyprofileComponent } from './privates/myprofile/myprofile.component';
 import { authGuard } from './guards/auth.guard';
+import { noauthGuard } from './guards/noauth.guard';
 
 export const routes: Routes = [
     {
@@ -12,6 +13,7 @@ export const routes: Routes = [
     
     {
         path: '',
+        canActivate: [noauthGuard],
         loadChildren: () => import("./auth/auth.routes").then(m => m.routes),
     },
   
