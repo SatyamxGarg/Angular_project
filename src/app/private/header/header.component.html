@@ -161,7 +161,7 @@
                     </div>
                     <ul ngbNav #nav="ngbNav" class="nav drp-tabs nav-fill nav-tabs">
                       <li ngbNavItem="1">
-                        <a ngbNavLink>
+                        <a  routerLinkActive="router-link-active"  ngbNavLink>
                           <i antIcon theme="outline" type="user" class="me-2"></i>
                           Profile
                         </a>
@@ -169,8 +169,8 @@
                           @for (task of profile; track task) {
                             <div>
                               <a class="dropdown-item">
-                                <i class="text-muted" antIcon theme="outline" type="{{ task.icon }}"></i>
-                                <span>{{ task.title }}</span>
+                                <i routerLinkActive="router-link-active"  class="text-muted" antIcon theme="outline" type="{{ task.icon }}"></i>
+                                <span [routerLink]=" task.url">{{ task.title }}</span>
                               </a>
                             </div>
                           }

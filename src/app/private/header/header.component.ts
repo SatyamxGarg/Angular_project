@@ -37,7 +37,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from '../../privates/shared/components/breadcrumb/breadcrumb.component';
 import { CardComponent } from '../../privates/shared/components/card/card.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -53,7 +53,7 @@ import { Router } from '@angular/router';
     NgbCollapseModule,
     NgScrollbarModule,
     CardComponent,
-    IconModule],
+    IconModule,RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -132,12 +132,10 @@ logout(){
     },
     {
       icon: 'user',
-      title: 'View Profile'
+      title: 'View Profile',
+      url:'/dashboard/profile'
     },
-    {
-      icon: 'profile',
-      title: 'Social Profile'
-    },
+ 
     {
       icon: 'wallet',
       title: 'Billing'
