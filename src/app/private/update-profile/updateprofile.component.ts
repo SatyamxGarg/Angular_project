@@ -128,8 +128,8 @@ export class UpdateProfileComponent {
   userData: any;
   updateForm: any;
   countryList!: Array<any>;
-  stateData!: any;
-  cityData!: any;
+  stateData!: Array<any>;
+  cityData!: Array<any>;
   genderOptions: string[] = ['female', 'male'];
 
   constructor(
@@ -145,7 +145,7 @@ export class UpdateProfileComponent {
       userLastName: ['', Validators.required],
       userCountry: '',
       userState: '',
-      userCity: 'select',
+      userCity: '',
       userPhone: ['', Validators.required],
       userGender: ['', Validators.required],
       age: ['', Validators.required],
@@ -153,17 +153,6 @@ export class UpdateProfileComponent {
     this.getUserData();
     this.fetchCountryData();
   }
-
-
-  // selectGender(formGroup: FormGroup) {
-  //   const gender = formGroup.get('userGender')?.value;
-  //   if (gender == 'select') {
-  //     return { invalidChoice: true };
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
 
   /**
    * Fetch logged in user data.
@@ -193,6 +182,9 @@ export class UpdateProfileComponent {
       userState: this.userData.user_state,
       userCity: this.userData.user_city
     });
+
+    this.changeCountryData();
+    this.changeStateData();
   }
 
   /**
@@ -203,7 +195,6 @@ export class UpdateProfileComponent {
     this.httpService.country().subscribe({
       next: (response: any) => {
         this.countryList = response.data[0];
-        
       },
       error: (err: Error) => {
         console.log(err);
@@ -211,18 +202,18 @@ export class UpdateProfileComponent {
     });
   }
 
-/**
+  /**
    * Fetch State Names and Id's.
    * @returns {void}
    */
   changeCountryData(): void {
+    
     const value: any = this.updateForm.get('userCountry');
     const data = {
       user_country: value?.value,
     };
     this.httpService.state(data)?.subscribe({
       next: (response: any) => {
-        console.log(response);
         this.stateData = response.data[0];
       },
       error: (err: any) => {
@@ -237,12 +228,15 @@ export class UpdateProfileComponent {
    */
   changeStateData(): void {
     const value: any = this.updateForm.get('userState');
+    if(!value?.value){
+      this.cityData = []
+      return
+    }
     const data = {
       user_state: value?.value,
     };
     this.httpService.city(data)?.subscribe({
       next: (response: any) => {
-        console.log(response);
         this.cityData = response.data[0];
       },
       error: (err: any) => {
@@ -250,6 +244,7 @@ export class UpdateProfileComponent {
       },
     });
   }
+
   onUpdate() {
     if (this.updateForm.valid) {
       const data = {
@@ -264,7 +259,6 @@ export class UpdateProfileComponent {
       };
       this.httpService.updateUserProfile(data).subscribe({
         next: (response: any) => {
-          console.log(response);
           this.toster.success(response.message);
           this.route.navigateByUrl("/")
         },
@@ -275,6 +269,5 @@ export class UpdateProfileComponent {
     }
   }
 }
-
 
 

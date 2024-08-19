@@ -210,22 +210,20 @@
                   @if (updateForm.get('age').hasError('required') &&
                   updateForm.get('age').touched) {
                   <span class="text-red-700 text-sm ml-2"
-                    >Please enter Your Age</span
-                  >
+                    >Please enter Your Age</span>
                   }
                 </div>
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group mb-3">
                       <label class="form-label" for="country"
-                        >Choose Country<span class="requiredField">*</span></label
-                      >
+                        >Choose Country<span class="requiredField">*</span></label>
                       <select
                         formControlName="userCountry"
                         class="form-control"
                         name="country"
                         id="country"
-                        (click)="changeCountryData()"
+                        (change)="changeCountryData(); updateForm.patchValue({ userState: '', userCity: '' })"
                       >
                         @for (item of countryList; track $index) {
                         <option [value]="item?.country_name">
@@ -243,16 +241,21 @@
                         class="form-control"
                         name="state"
                         id="state"
-                        (click)="changeStateData()"
+                        (change)="changeStateData(); updateForm.patchValue({ userCity: '' })"
                       >
-                        @for (item of stateData; track $index) {
-                        <option [value]="item?.state_name">
+                      <option value="" selected>Select State</option>
+                      
+                      @for (item of stateData; track $index) {
+                        
+                        <option [value]="item?.state_name" [selected]="userData.user_state === item?.state_name">
                           {{ item?.state_name }}
                         </option>
-                        }
-                      </select>
+                      }
+                    </select>
                     </div>
                   </div>
+
+                                  
                   <div class="col-md-4">
                     <div class="form-group mb-3">
                       <label class="form-label" for="city">Choose City<span class="requiredField">*</span></label>
@@ -262,8 +265,10 @@
                         name="city"
                         id="city"
                       >
+                      <option value="">Select City</option>
+
                         @for (item of cityData; track $index) {
-                        <option [value]="item?.city_name">
+                        <option [value]="item?.city_name" [selected]="userData.user_city === item.city_name">
                           {{ item?.city_name }}
                         </option>
                         }
@@ -276,6 +281,7 @@
                     (click)="onUpdate()"
                     type="button"
                     class="btn btn-primary"
+                    [disabled]="updateForm.invalid"
                   >
                     Submit
                   </button>
@@ -287,4 +293,3 @@
       </div>
     </div>
   </div>
-  
