@@ -225,6 +225,7 @@
                         class="form-control"
                         name="country"
                         id="country"
+                        (click)="changeCountryData()"
                       >
                         @for (item of countryList; track $index) {
                         <option [value]="item?.country_name">
@@ -242,12 +243,13 @@
                         class="form-control"
                         name="state"
                         id="state"
+                        (click)="changeStateData()"
                       >
-                        <!-- @for (item of stateData; track $index) {
+                        @for (item of stateData; track $index) {
                         <option [value]="item?.state_name">
                           {{ item?.state_name }}
                         </option>
-                        } -->
+                        }
                       </select>
                     </div>
                   </div>
@@ -260,11 +262,11 @@
                         name="city"
                         id="city"
                       >
-                        <!-- @for (item of cityData; track $index) {
+                        @for (item of cityData; track $index) {
                         <option [value]="item?.city_name">
                           {{ item?.city_name }}
                         </option>
-                        } -->
+                        }
                       </select>
                     </div>
                   </div>
@@ -286,5 +288,3 @@
     </div>
   </div>
   
-  
- 

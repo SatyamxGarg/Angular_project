@@ -105,7 +105,6 @@
 
 
 
-
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { HttpService } from '../../services/http.service';
@@ -129,6 +128,8 @@ export class UpdateProfileComponent {
   userData: any;
   updateForm: any;
   countryList!: Array<any>;
+  stateData!: any;
+  cityData!: any;
   genderOptions: string[] = ['female', 'male'];
 
   constructor(
@@ -202,6 +203,7 @@ export class UpdateProfileComponent {
     this.httpService.country().subscribe({
       next: (response: any) => {
         this.countryList = response.data[0];
+        
       },
       error: (err: Error) => {
         console.log(err);
@@ -209,41 +211,45 @@ export class UpdateProfileComponent {
     });
   }
 
+/**
+   * Fetch State Names and Id's.
+   * @returns {void}
+   */
+  changeCountryData(): void {
+    const value: any = this.updateForm.get('userCountry');
+    const data = {
+      user_country: value?.value,
+    };
+    this.httpService.state(data)?.subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.stateData = response.data[0];
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 
-  // ChangeCountryData() {
-  //   console.log(this.updateForm.get('userCountry'));
-  //   const value: any = this.updateForm.get('userCountry');
-  //   console.log('hii', value?.value);
-  //   const data = {
-  //     user_country: value?.value,
-  //   };
-  //   this.httpService.state(data)?.subscribe({
-  //     next: (response: any) => {
-  //       console.log(response);
-  //       this.stateData = response.data;
-  //     },
-  //     error: (err: any) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
-  // ChangeStateData() {
-  //   console.log(this.updateForm.get('userState'));
-  //   const value: any = this.updateForm.get('userState');
-  //   console.log('hii', value?.value);
-  //   const data = {
-  //     user_state: value?.value,
-  //   };
-  //   this.httpService.city(data)?.subscribe({
-  //     next: (response: any) => {
-  //       console.log(response);
-  //       this.cityData = response.data;
-  //     },
-  //     error: (err: any) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
+  /**
+   * Fetch City Names and Id's.
+   * @returns {void}
+   */
+  changeStateData(): void {
+    const value: any = this.updateForm.get('userState');
+    const data = {
+      user_state: value?.value,
+    };
+    this.httpService.city(data)?.subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.cityData = response.data[0];
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
   onUpdate() {
     if (this.updateForm.valid) {
       const data = {
@@ -253,7 +259,7 @@ export class UpdateProfileComponent {
         user_country: this.updateForm.value.userCountry,
         user_state: this.updateForm.value.userState,
         user_city: this.updateForm.value.userCity,
-        age: this.updateForm.value.age,
+        user_age: this.updateForm.value.age,
         user_phone: this.updateForm.value.userPhone,
       };
       this.httpService.updateUserProfile(data).subscribe({
@@ -269,3 +275,6 @@ export class UpdateProfileComponent {
     }
   }
 }
+
+
+
