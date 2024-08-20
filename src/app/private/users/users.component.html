@@ -1,4 +1,4 @@
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	
@@ -31,12 +31,7 @@
                                 <td>{{ list?.user_last_name }}</td>
                                 <td>{{ list?.user_age }}</td>
                                 <td>{{ list?.user_gender }}</td>
-                                <!-- <td>
-                                    <span class="d-block">
-                                        <i class="badge-circle {{ order.status_type }} f-10 m-r-5"></i>
-                                        {{ order.status }}
-                                    </span>
-                                </td> -->
+                                
                                 <td>{{ list?.user_phone }}</td>
                                 <td>{{ list?.user_email }}</td>
                                 <td> 
@@ -50,6 +45,26 @@
                         </tbody>
                     </table>
                 }
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+ <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css" />
+ <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css" />
+ <h2 class="mb-3">Users List</h2>
+<div class="row" style="width:2000px; margin-left:100px;">
+    <div class="col-md-12 col-xl-8">
+        <div class="card tbl-card">
+            <div class="ag-theme-alpine" style="height: 800px; width: 100%;">
+                <ag-grid-angular
+                    style="width: 100%; height: 100%;"
+                    class="ag-theme-alpine"
+                    [rowData]="user"
+                    [columnDefs]="columnDefs"
+                    [defaultColDef]="defaultColDef">
+                </ag-grid-angular>
             </div>
         </div>
     </div>
