@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterLink } from '@angular/router';
+import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
+import { ColDef } from 'ag-grid-community'; // Column Definition Type Interface
 
 
 @Component({
@@ -10,18 +12,15 @@ import { Router, RouterLink } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-
+    AgGridAngular
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
   user!: Array<any>;
-
-  // constructor
-  // constructor(private iconService: IconService) {
-  //   this.iconService.addIcon(...[RiseOutline, FallOutline, SettingOutline, GiftOutline, MessageOutline]);
-  // }
+  userData: any;
+  id:any;
 
   constructor(
     private httpService: HttpService,
@@ -58,11 +57,11 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  editFunc(){
-    this.router.navigate(['/profile/update-profile']);
+  editFunc(id:any){
+    this.router.navigate(['/profile/users/edit-user/'+id]);
   }
   delFunc(){
-    
+
   }
 
 }

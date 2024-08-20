@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChangePasswordComponent } from './change-password/changepassword.component';
 import { UpdateProfileComponent } from './update-profile/updateprofile.component';
 import { UsersComponent } from './users/users.component';
+import { EditUsersComponent } from './edit-users/edit-users.component';
 
 export const routes: Routes = [
 
@@ -32,6 +33,11 @@ export const routes: Routes = [
             {
                 path: 'users',
                 component: UsersComponent
+                
+            },
+            {
+                path: 'users/edit-user/:id',
+                component: EditUsersComponent
                 
             },
            

@@ -1,0 +1,190 @@
+  <div class="auth-main main">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="card my-5">
+          <div class="card-body">
+            @if (userData) {
+              <form [formGroup]="updateForm">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                  <h3 class="mb-0"><b>Update Profile</b></h3>
+                  <!-- <a [routerLink]="['']" class="link-primary">Home</a> -->
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="firstName">First Name<span class="requiredField">*</span></label>
+                      <input
+                        formControlName="userFirstName"
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        placeholder="First Name"
+                        [value]="userData.user_first_name"
+                      />
+                      @if (updateForm.get('userFirstName').hasError('required') &&
+                      updateForm.get('userFirstName').touched) {
+                      <span class="text-red-700 text-sm ml-2"
+                        >Please enter First Name</span
+                      >
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="lastName">Last Name<span class="requiredField">*</span></label>
+                      <input
+                        formControlName="userLastName"
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        placeholder="Last Name"
+                        [value]="userData.user_last_name"
+                      />
+                      @if (updateForm.get('userLastName').hasError('required') &&
+                      updateForm.get('userLastName').touched) {
+                      <span class="text-red-700 text-sm ml-2"
+                        >Please enter last Name</span
+                      >
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="company">Gender<span class="requiredField">*</span></label>
+                      <select
+                        formControlName="userGender"
+                        class="form-control"
+                        name="gender"
+                        id="gender"
+                      >
+                        @for (item of genderOptions; track $index) {
+                          <option [value]="item" [selected]="userData.user_gender === item">
+                            {{ item }}
+                          </option>
+                        }
+                      </select>
+                      @if (updateForm.get('userGender').invalid) {
+                      <span>Choose please</span>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="company">Phone Number<span class="requiredField">*</span></label>
+                      <input
+                        formControlName="userPhone"
+                        type="number"
+                        class="form-control"
+                        id="company"
+                        placeholder="Phone Number"
+                        [value]="userData.user_phone"
+                      />
+                      @if (updateForm.get('userPhone').hasError('required') &&
+                      updateForm.get('userPhone').touched) {
+                      <span class="text-red-700 text-sm ml-2"
+                        >Please enter Phone Number</span
+                      >
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label" for="emailAddress"
+                    >Age<span class="requiredField">*</span></label
+                  >
+                  <input
+                    formControlName="age"
+                    type="text"
+                    class="form-control"
+                    id="emailAddress"
+                    placeholder="Age"
+                    [value]="userData.user_age"
+                  />
+                  @if (updateForm.get('age').hasError('required') &&
+                  updateForm.get('age').touched) {
+                  <span class="text-red-700 text-sm ml-2"
+                    >Please enter Your Age</span>
+                  }
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="country"
+                        >Choose Country<span class="requiredField">*</span></label>
+                      <select
+                        formControlName="userCountry"
+                        class="form-control"
+                        name="country"
+                        id="country"
+                        (change)="changeCountryData(); updateForm.patchValue({ userState: '', userCity: '' })"
+                      >
+                        @for (item of countryList; track $index) {
+                        <option [value]="item?.country_name">
+                          {{ item?.country_name }}
+                        </option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="state">Choose State<span class="requiredField">*</span></label>
+                      <select
+                        formControlName="userState"
+                        class="form-control"
+                        name="state"
+                        id="state"
+                        (change)="changeStateData(); updateForm.patchValue({ userCity: '' })"
+                      >
+                      <option value="" selected>Select State</option>
+                      
+                      @for (item of stateData; track $index) {
+                        
+                        <option [value]="item?.state_name" [selected]="userData.user_state === item?.state_name">
+                          {{ item?.state_name }}
+                        </option>
+                      }
+                    </select>
+                    </div>
+                  </div>
+
+                                  
+                  <div class="col-md-4">
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="city">Choose City<span class="requiredField">*</span></label>
+                      <select
+                        formControlName="userCity"
+                        class="form-control"
+                        name="city"
+                        id="city"
+                      >
+                      <option value="">Select City</option>
+
+                        @for (item of cityData; track $index) {
+                        <option [value]="item?.city_name" [selected]="userData.user_city === item.city_name">
+                          {{ item?.city_name }}
+                        </option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-grid mt-3">
+                  <button
+                    (click)="onUpdate()"
+                    type="button"
+                    class="btn btn-primary"
+                    [disabled]="updateForm.invalid"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

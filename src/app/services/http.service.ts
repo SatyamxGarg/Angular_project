@@ -38,5 +38,9 @@ export class HttpService {
     return this.http.post("http://localhost/Angular_crud/em_be/api/v1/users/",body); 
 
    }
+   getEditUser(body:any){
+    return this.http.post("http://localhost/Angular_crud/em_be/api/v1/edit-data/",body); 
+
+   }
 }
 

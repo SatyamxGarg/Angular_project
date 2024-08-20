@@ -40,8 +40,8 @@
                                 <td>{{ list?.user_phone }}</td>
                                 <td>{{ list?.user_email }}</td>
                                 <td> 
-                                    <button (click)="editFunc()"><i class="fa-solid fa-pen"></i></button>
-                                        <button (click)="delFunc()"><i class="fa-solid fa-trash"></i></button> 
+                                    <button (click)="editFunc(list?.user_id)"><i class="fa-solid fa-pen"></i></button>
+                                        <button (click)="delFunc()" style="margin-left:5px;"><i class="fa-solid fa-trash"></i></button> 
                                       
                                    </td>
 
