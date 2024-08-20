@@ -130,7 +130,7 @@ export class UpdateProfileComponent {
   countryList!: Array<any>;
   stateData!: Array<any>;
   cityData!: Array<any>;
-  genderOptions: string[] = ['female', 'male'];
+  genderOptions: string[] = ['male', 'female'];
 
   constructor(
     private httpService: HttpService,

@@ -34,5 +34,9 @@ export class HttpService {
    city(body:any){
     return this.http.post("http://localhost/Angular_crud/em_be/api/v1/city/",body); 
    }
+   getAllUsers(body:any){
+    return this.http.post("http://localhost/Angular_crud/em_be/api/v1/users/",body); 
+
+   }
 }
 

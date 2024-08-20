@@ -6,6 +6,7 @@ import { MyprofileComponent } from './my-profile/myprofile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChangePasswordComponent } from './change-password/changepassword.component';
 import { UpdateProfileComponent } from './update-profile/updateprofile.component';
+import { UsersComponent } from './users/users.component';
 
 export const routes: Routes = [
 
@@ -26,6 +27,11 @@ export const routes: Routes = [
             {
                 path: 'change-password',
                 component: ChangePasswordComponent
+                
+            },
+            {
+                path: 'users',
+                component: UsersComponent
                 
             },
            
