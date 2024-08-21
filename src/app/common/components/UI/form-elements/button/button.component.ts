@@ -20,4 +20,3 @@ export class ButtonComponent {
     this.onBtnClick.emit();
   }
 }
-

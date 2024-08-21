@@ -133,7 +133,7 @@ export class UpdateProfileComponent {
   countryList!: Array<any>;
   stateData!: Array<any>;
   cityData!: Array<any>;
-  genderOptions: string[] = ['male', 'female'];
+  genderOptions = [{value:'male',display:'Male'},{value:'female',display:'Female'}];
  
   constructor(
     private httpService: HttpService,
@@ -198,6 +198,9 @@ export class UpdateProfileComponent {
     this.httpService.country().subscribe({
       next: (response: any) => {
         this.countryList = response.data[0];
+        this.countryList =  this.countryList.map((obj:any) => {
+          return {value:obj.country_name, display: obj.country_name}
+        })
       },
       error: (err: Error) => {
         console.log(err);
@@ -218,6 +221,9 @@ export class UpdateProfileComponent {
     this.httpService.state(data)?.subscribe({
       next: (response: any) => {
         this.stateData = response.data[0];
+        this.stateData =  this.stateData.map((obj:any) => {
+          return {value:obj.state_name, display: obj.state_name}
+        })
       },
       error: (err: any) => {
         console.log(err);
@@ -241,6 +247,9 @@ export class UpdateProfileComponent {
     this.httpService.city(data)?.subscribe({
       next: (response: any) => {
         this.cityData = response.data[0];
+        this.cityData =  this.cityData.map((obj:any) => {
+          return {value:obj.city_name, display: obj.city_name}
+        })
       },
       error: (err: any) => {
         console.log(err);

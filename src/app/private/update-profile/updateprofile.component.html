@@ -129,7 +129,7 @@
                 </div>
                 <div class="form-group mb-3">
 
-                  <app-select-dropdown [title]="'Gender*'" [id]="'gender'" [selectedValue]="userData.user_gender"> </app-select-dropdown>
+                  <app-select-dropdown [title]="'Gender*'" [id]="'gender'" [valueArray]="genderOptions" [selectedValue]="userData.user_gender"> </app-select-dropdown>
                   @if (updateForm.get('userGender').invalid) {
                     <span>Choose please</span>
                     } 
@@ -156,7 +156,9 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group mb-3">
-                      <label class="form-label" for="country"
+                      <app-select-dropdown [title]="'Choose Country*'" [id]="'country'" [valueArray]="countryList" [selectedValue]="userData.user_country" (onBtnClick)="changeCountryData()"> </app-select-dropdown>
+                
+                      <!-- <label class="form-label" for="country"
                         >Choose Country<span class="requiredField">*</span></label>
                       <select
                         formControlName="userCountry"
@@ -170,12 +172,16 @@
                           {{ item?.country_name }}
                         </option>
                         }
-                      </select>
+                      </select> -->
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-3">
-                      <label class="form-label" for="state">Choose State<span class="requiredField">*</span></label>
+
+                      <app-select-dropdown [title]="'Choose State*'" [id]="'state'" [valueArray]="stateData" [selectedValue]="userData.user_state" (onBtnClick)="changeStateData()"> </app-select-dropdown>
+
+
+                      <!-- <label class="form-label" for="state">Choose State<span class="requiredField">*</span></label>
                       <select
                         formControlName="userState"
                         class="form-control"
@@ -191,14 +197,18 @@
                           {{ item?.state_name }}
                         </option>
                       }
-                    </select>
+                    </select> -->
                     </div>
                   </div>
 
                                   
                   <div class="col-md-4">
                     <div class="form-group mb-3">
-                      <label class="form-label" for="city">Choose City<span class="requiredField">*</span></label>
+
+                      <app-select-dropdown [title]="'Choose City*'" [id]="'city'" [valueArray]="cityData" [selectedValue]="userData.user_city"> </app-select-dropdown>
+
+
+                      <!-- <label class="form-label" for="city">Choose City<span class="requiredField">*</span></label>
                       <select
                         formControlName="userCity"
                         class="form-control"
@@ -212,7 +222,7 @@
                           {{ item?.city_name }}
                         </option>
                         }
-                      </select>
+                      </select> -->
                     </div>
                   </div>
                 </div>
