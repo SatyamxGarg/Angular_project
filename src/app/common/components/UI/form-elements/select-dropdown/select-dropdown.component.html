@@ -1,0 +1,8 @@
+<mat-form-field>
+    <mat-label>{{title}}</mat-label>
+    <mat-select [(value)]="selectedValue">
+      @for (item of gender; track item) {
+        <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>

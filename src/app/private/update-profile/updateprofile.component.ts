@@ -116,11 +116,14 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { cloneSVG } from '@ant-design/icons-angular';
+import { InputBoxComponent } from "../../common/components/UI/form-elements/input-box/input-box.component";
+import { SelectDropdownComponent } from '../../common/components/UI/form-elements/select-dropdown/select-dropdown.component';
+import { ButtonComponent } from "../../common/components/UI/form-elements/button/button.component";
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent],
   templateUrl: './updateprofile.component.html',
   styleUrl: './updateprofile.component.scss',
 })
