@@ -155,7 +155,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group mb-3">
-                      <app-select-dropdown [title]="'Choose Country'" [formControlName]="'userCountry'" [id]="'country'" [valueArray]="countryList" [selectedValue]="userData.user_country" (onBtnClick)="changeCountryData()"> </app-select-dropdown>
+                      <app-select-dropdown [title]="'Choose Country'" [formControlName]="'userCountry'" [id]="'country'" [valueArray]="countryList" [selectedValue]="userData.user_country" (onBtnClick)="changeCountryData();updateForm.patchValue({ userState: '', userCity: '' });"> </app-select-dropdown>
                       @if (updateForm.get('userCountry').hasError('required') &&
                       updateForm.get('userCountry').touched) {
                       <span class="text-red-700 text-sm ml-2"
@@ -183,12 +183,10 @@
                   <div class="col-md-4">
                     <div class="form-group mb-3">
 
-                      <app-select-dropdown [title]="'Choose State'" [formControlName]="'userState'" [id]="'state'" [valueArray]="stateData" [selectedValue]="userData.user_state" (onBtnClick)="changeStateData()"> </app-select-dropdown>
+                      <app-select-dropdown [title]="'Choose State'" [formControlName]="'userState'" [id]="'state'" [valueArray]="stateData" [selectedValue]="userData.user_state" (onBtnClick)="changeStateData();updateForm.patchValue({ userCity: '' })"> </app-select-dropdown>
                       @if (updateForm.get('userState').hasError('required') &&
                     updateForm.get('userState').touched) {
-                    <span class="text-red-700 text-sm ml-2"
-                      >State is required.</span
-                    >
+                     <p style="color:red; margin-left:10px;">State is required.</p>
                     }
 
                       <!-- <label class="form-label" for="state">Choose State<span class="requiredField">*</span></label>
@@ -241,7 +239,7 @@
                   </div>
                 </div>
                 <div class="d-grid mt-3">
-                  <app-button [title]="'Submit'" (onBtnClick)="onUpdate()"></app-button>
+                  <app-button [title]="'Submit'" (onBtnClick)="onUpdate()" [disable]="loader"></app-button>
                   <!-- <button
                     (click)="onUpdate()"
                     type="button"

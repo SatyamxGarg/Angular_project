@@ -1,6 +1,12 @@
 <section>
     <div class="example-button-row">
-      <button mat-flat-button (click)="onClick()">{{title}}</button>
+      <button mat-flat-button (click)="onClick()" [disabled]="disable">
+        @if(disable){
+          <mat-spinner class="spinner"></mat-spinner>
+        }@else {
+          {{title}}
+        }
+      </button>
     </div>
   </section>
   <!-- <mat-divider></mat-divider> -->

@@ -28,6 +28,7 @@ export class UpdateProfileComponent {
   stateData!: Array<any>;
   cityData!: Array<any>;
   genderOptions = [{value:'male',display:'Male'},{value:'female',display:'Female'}];
+  loader: boolean = false;
  
   constructor(
     private httpService: HttpService,
@@ -108,7 +109,6 @@ export class UpdateProfileComponent {
    * @returns {void}
    */
   changeCountryData(): void {
-     this.updateForm.patchValue({ userState: '', userCity: '' });
     const value: any = this.updateForm.get('userCountry');
     const data = {
       user_country: value?.value,
@@ -132,7 +132,6 @@ export class UpdateProfileComponent {
    * @returns {void}
    */
   changeStateData(): void {
-    this.updateForm.patchValue({ userCity: '' });
     const value: any = this.updateForm.get('userState');
     if(!value?.value){
       this.cityData = []
@@ -155,6 +154,10 @@ export class UpdateProfileComponent {
   }
 
   onUpdate() {
+
+    if(this.loader) return
+
+    this.loader = true;
     if (this.updateForm.valid) {
       const data = {
         user_first_name: this.updateForm.value.userFirstName,
@@ -168,11 +171,13 @@ export class UpdateProfileComponent {
       };
       this.httpService.updateUserProfile(data).subscribe({
         next: (response: any) => {
+          this.loader = false;
           this.toster.success(response.message);
           this.route.navigateByUrl("/")
         },
         error: (err: any) => {
           console.log(err);
+          this.loader = false;
         },
       });
     }
