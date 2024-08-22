@@ -7,44 +7,63 @@
       <div class="card my-5">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-end mb-4">
-            <h3 class="mb-0"><b>Sign up</b></h3>
+            <h3 class="mb-0">Sign up</h3>
             <a [routerLink]="['/login']" class="link-primary">Already have an account?</a>
           </div>
           <form [formGroup]="signupForm">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group mb-3">
-                <label class="form-label" for="firstName">First Name*</label>
+
+
+                <app-input-box [id]="'firstName'" [type]="'text'" [formControlName]="'fname'" [placeholder]="'First Name'" [title]="'First Name'"></app-input-box>
+                <!-- class="form-control" -->
+                @if (signupForm.get('fname')?.hasError('required') && signupForm.get('fname').touched) {
+                  <div style="color:red;margin-left:10px;">First name is required.</div>
+                }
+                <!-- <label class="form-label" for="firstName">First Name*</label>
                 <input type="text" class="form-control" id="firstName" placeholder="First Name" name="fname" formControlName="fname">
                 @if (signupForm.get('fname')?.hasError('required') && signupForm.get('fname').touched) {
                     <div style="color:red;margin-left:10px;">First name is required.</div>
-                  }
+                  } -->
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group mb-3">
-                <label class="form-label" for="lastName">Last Name*</label>
+                <app-input-box [id]="'lastName'" [type]="'text'" [formControlName]="'lname'" [placeholder]="'Last Name'" [title]="'Last Name'"></app-input-box>
+                @if (signupForm.get('lname')?.hasError('required') && signupForm.get('lname').touched) {
+                  <div style="color:red;margin-left:10px;">Last name is required.</div>
+                }
+                <!-- <label class="form-label" for="lastName">Last Name*</label>
                 <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lname" formControlName="lname">
                 @if (signupForm.get('lname')?.hasError('required') && signupForm.get('lname').touched) {
                     <div style="color:red;margin-left:10px;">Last name is required.</div>
-                  }
+                  } -->
               </div>
             </div>
           </div>
          
           <div class="form-group mb-3">
-            <label class="form-label" for="emailAddress">Email Address*</label>
-            <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" name="email" formControlName="email">
+            <app-input-box [id]="'emailAddress'" [type]="'email'" [formControlName]="'email'" [placeholder]="'Email Address'" [title]="'Email Address'"></app-input-box>
             @if (signupForm.get('email')?.hasError('required') && signupForm.get('email').touched) {
               <div style="color:red;margin-left:10px;">Email is required.</div>
             }
+            <!-- <label class="form-label" for="emailAddress">Email Address*</label>
+            <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" name="email" formControlName="email">
+            @if (signupForm.get('email')?.hasError('required') && signupForm.get('email').touched) {
+              <div style="color:red;margin-left:10px;">Email is required.</div>
+            } -->
           </div>
           <div class="form-group mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" name="password" formControlName="password">
+            <app-input-box [id]="'password'" [type]="'password'" [formControlName]="'password'" [placeholder]="'Password'" [title]="'Password'"></app-input-box>
             @if (signupForm.get('password')?.hasError('required') && signupForm.get('password').touched) {
               <div style="color:red;margin-left:10px;">Password is required.</div>
             }
+            <!-- <label class="form-label" for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" formControlName="password">
+            @if (signupForm.get('password')?.hasError('required') && signupForm.get('password').touched) {
+              <div style="color:red;margin-left:10px;">Password is required.</div>
+            } -->
           </div>
           <p class="mt-4 text-sm text-muted">
             By Signing up, you agree to our
@@ -53,7 +72,9 @@
             <a href="javascript:" class="text-primary">Privacy Policy</a>
           </p>
           <div class="d-grid mt-3">
-            <button type="button" (click)="onSignup()" [disabled]="signupForm.invalid" class="btn btn-primary">Create Account</button>
+            <app-button [title]="'Create Account'" (onBtnClick)="onSignup()" [disable]="loader"></app-button>
+
+            <!-- <button type="button" (click)="onSignup()" [disabled]="signupForm.invalid" class="btn btn-primary">Create Account</button> -->
           </div>
           </form>
           <div class="saprator mt-3">

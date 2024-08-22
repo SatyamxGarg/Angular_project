@@ -6,17 +6,21 @@ import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../../services/http.service'; 
+import { InputBoxComponent } from '../../common/components/UI/form-elements/input-box/input-box.component';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '../../common/components/UI/form-elements/button/button.component';
 
 @Component({
   selector: 'app-changepassword',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule,InputBoxComponent,FormsModule,ButtonComponent],
   templateUrl: './changepassword.component.html',
   styleUrls: ['./changepassword.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
 
   passwordForm: any;
+  loader : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +28,10 @@ export class ChangePasswordComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router
   ) { 
+   
+  }
+
+  ngOnInit(): void {
     this.passwordForm = this.formBuilder.group({
       currentPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required]],
@@ -31,7 +39,8 @@ export class ChangePasswordComponent implements OnInit {
     }, { validator: this.passwordMatchValidator });
   }
 
-  ngOnInit(): void {
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
   }
 
   passwordMatchValidator(form: any) {
@@ -47,11 +56,16 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   onSubmit() {
+
+    if(this.loader) return
+
+    
     if (this.passwordForm.invalid) {
       this.toastr.error('Please enter correct password.');
       return;
     }
-
+    
+    this.loader = true;
     const data = {
       currentPassword: this.passwordForm.value.currentPassword,
       newPassword: this.passwordForm.value.newPassword
@@ -59,6 +73,7 @@ export class ChangePasswordComponent implements OnInit {
 
     this.httpService.changePassword(data).subscribe({
       next: (response: any) => {
+        this.loader = false;
         if (!response.status) {
           this.toastr.error(response.message);
           return;
@@ -68,6 +83,8 @@ export class ChangePasswordComponent implements OnInit {
       },
       error: (error) => {
         this.toastr.error(error.error.message);
+        this.loader = false;
+
       }
     });
   }

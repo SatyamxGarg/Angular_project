@@ -7,15 +7,19 @@ import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { InputBoxComponent } from '../../common/components/UI/form-elements/input-box/input-box.component';
+import { ButtonComponent } from '../../common/components/UI/form-elements/button/button.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule,InputBoxComponent,ButtonComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
+
+  loader: boolean=false;
 
   SignUpOptions = [
     {
@@ -55,6 +59,16 @@ export class SignupComponent {
   }
 
   onSignup() {
+
+    if(this.loader) return
+    if (this.signupForm.invalid) {
+      this.toastr.error('Please enter correct details.');
+      return;
+    }
+    
+
+    this.loader = true;
+
     const data = {
       user_first_name: this.signupForm.value.fname,
       user_last_name: this.signupForm.value.lname,
@@ -63,6 +77,7 @@ export class SignupComponent {
     };
     this.httpService.signupPost(data).subscribe({
       next: (response: any) => {
+        this.loader = false;
         if (!response.status) {
           this.toastr.error(response.message)
           return
@@ -72,6 +87,7 @@ export class SignupComponent {
         this.router.navigate(['/login']);
       },
       error: (error) => {
+        this.loader = false;
         this.toastr.error(error.error.message)
         // console.log(error);
       },

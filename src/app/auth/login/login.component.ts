@@ -9,15 +9,19 @@ import { ToastrService } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 // import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { InputBoxComponent } from '../../common/components/UI/form-elements/input-box/input-box.component';
+import { ButtonComponent } from '../../common/components/UI/form-elements/button/button.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule,InputBoxComponent, ButtonComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 
 export class LoginComponent {
+
+  loader: boolean=false;
 
   SignInOptions = [
     {
@@ -53,12 +57,23 @@ export class LoginComponent {
   }
 
   onSubmit() {
+
+    if(this.loader) return
+    if (this.userForm.invalid) {
+      this.toastr.error('Please enter correct details.');
+      return;
+    }
+    
+
+    this.loader = true;
+
     const data = {
       user_email: this.userForm.value.email,
       user_password: this.userForm.value.password
     };
     this.httpService.loginPost(data).subscribe({
       next: (response: any) => {
+        this.loader = false;
         if (!response.status) {
           this.toastr.error(response.message)
           return
@@ -68,6 +83,7 @@ export class LoginComponent {
         this.route.navigate(['/profile']);
       },
       error: (error) => {
+        this.loader = false;
         this.toastr.error(error.error.message)
       },
     });

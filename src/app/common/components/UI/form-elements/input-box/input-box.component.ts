@@ -51,6 +51,7 @@ export class InputBoxComponent implements ControlValueAccessor {
   @Input() title: string='';
   @Input() value: string='';
   @Input() id: string='';
+  @Input() type:any;
 
   
   disabled = false;

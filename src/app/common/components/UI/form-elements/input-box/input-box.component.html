@@ -1,18 +1,11 @@
-<!-- <mat-form-field class="example-full-width">
-  <mat-label>{{title}}</mat-label>
-  <input matInput [formControlName]="formControlName" [placeholder]="placeholder" [value]="value" [id]="id">
-</mat-form-field> -->
-
 <mat-form-field class="example-full-width" >
   <mat-label>{{ title }}<span class="requiredField">*</span></mat-label>
-  <input
-   
-   
+  <input 
     [value]="value"
     (input)="handleInputChange($event)"
     [disabled]="disabled"
+    [type]="type"
     matInput
     placeholder="{{ placeholder }}"
   />
 </mat-form-field>
-

@@ -157,8 +157,8 @@ export class UpdateProfileComponent {
 
     if(this.loader) return
 
-    this.loader = true;
     if (this.updateForm.valid) {
+      this.loader = true;
       const data = {
         user_first_name: this.updateForm.value.userFirstName,
         user_last_name: this.updateForm.value.userLastName,
