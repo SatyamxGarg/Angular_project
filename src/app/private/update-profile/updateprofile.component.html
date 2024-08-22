@@ -15,15 +15,14 @@
                   
                   <div class="col-md-6">
 
-                     <app-input-box [id]="'firstName'" [placeholder]="'Enter First Name'" [title]="'First Name*'" [value]="userData.user_first_name"></app-input-box>
+                     <app-input-box [id]="'firstName'" [formControlName]="'userFirstName'" [placeholder]="'Enter First Name'" [title]="'First Name'" [value]="userData.user_first_name"></app-input-box>
                      @if (updateForm.get('userFirstName').hasError('required') &&
                      updateForm.get('userFirstName').touched) {
                      <span class="text-red-700 text-sm ml-2"
                        >Please enter First Name</span
                      >
                      }
-
-                    <!-- <div class="form-group mb-3">
+                      <!-- <div class="form-group mb-3">
                       <label class="form-label" for="firstName">First Name<span class="requiredField">*</span></label>
                       <input
                         type="text"
@@ -43,7 +42,7 @@
                  
 
                    <div class="col-md-6">
-                    <app-input-box [id]="'lastName'" [placeholder]="'Enter Last Name'" [title]="'Last Name*'"[value]="userData.user_last_name"></app-input-box>
+                    <app-input-box [id]="'lastName'"  [formControlName]="'userLastName'" [placeholder]="'Enter Last Name'" [title]="'Last Name'"[value]="userData.user_last_name"></app-input-box>
                      @if (updateForm.get('userLastName').hasError('required') &&
                      updateForm.get('userLastName').touched) {
                      <span class="text-red-700 text-sm ml-2"
@@ -74,7 +73,7 @@
                   <div class="col-md-6">
 
 
-                  <app-input-box [id]="'emailAddress'" [placeholder]="'Age'" [title]="'Age*'"[value]="userData.user_age"></app-input-box>
+                  <app-input-box [id]="'emailAddress'" [formControlName]="'age'" [placeholder]="'Age'" [title]="'Age'"[value]="userData.user_age"></app-input-box>
                   @if (updateForm.get('age').hasError('required') &&
                   updateForm.get('age').touched) {
                   <span class="text-red-700 text-sm ml-2"
@@ -101,7 +100,7 @@
 
                   <div class="col-md-6">
 
-                    <app-input-box [id]="'company'" [placeholder]="'Phone Number'" [title]="'Phone Number*'"[value]="userData.user_phone"></app-input-box>
+                    <app-input-box [id]="'company'" [formControlName]="'userPhone'" [placeholder]="'Phone Number'" [title]="'Phone Number'"[value]="userData.user_phone"></app-input-box>
                     @if (updateForm.get('userPhone').hasError('required') &&
                     updateForm.get('userPhone').touched) {
                     <span class="text-red-700 text-sm ml-2"
@@ -129,7 +128,7 @@
                 </div>
                 <div class="form-group mb-3">
 
-                  <app-select-dropdown [title]="'Gender*'" [id]="'gender'" [valueArray]="genderOptions" [selectedValue]="userData.user_gender"> </app-select-dropdown>
+                  <app-select-dropdown [title]="'Gender'" [id]="'gender'" [formControlName]="'userGender'" [valueArray]="genderOptions" [selectedValue]="userData.user_gender"> </app-select-dropdown>
                   @if (updateForm.get('userGender').invalid) {
                     <span>Choose please</span>
                     } 
@@ -156,7 +155,13 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group mb-3">
-                      <app-select-dropdown [title]="'Choose Country*'" [id]="'country'" [valueArray]="countryList" [selectedValue]="userData.user_country" (onBtnClick)="changeCountryData()"> </app-select-dropdown>
+                      <app-select-dropdown [title]="'Choose Country'" [formControlName]="'userCountry'" [id]="'country'" [valueArray]="countryList" [selectedValue]="userData.user_country" (onBtnClick)="changeCountryData()"> </app-select-dropdown>
+                      @if (updateForm.get('userCountry').hasError('required') &&
+                      updateForm.get('userCountry').touched) {
+                      <span class="text-red-700 text-sm ml-2"
+                        >Country is required.</span
+                      >
+                      }
                 
                       <!-- <label class="form-label" for="country"
                         >Choose Country<span class="requiredField">*</span></label>
@@ -178,8 +183,13 @@
                   <div class="col-md-4">
                     <div class="form-group mb-3">
 
-                      <app-select-dropdown [title]="'Choose State*'" [id]="'state'" [valueArray]="stateData" [selectedValue]="userData.user_state" (onBtnClick)="changeStateData()"> </app-select-dropdown>
-
+                      <app-select-dropdown [title]="'Choose State'" [formControlName]="'userState'" [id]="'state'" [valueArray]="stateData" [selectedValue]="userData.user_state" (onBtnClick)="changeStateData()"> </app-select-dropdown>
+                      @if (updateForm.get('userState').hasError('required') &&
+                    updateForm.get('userState').touched) {
+                    <span class="text-red-700 text-sm ml-2"
+                      >State is required.</span
+                    >
+                    }
 
                       <!-- <label class="form-label" for="state">Choose State<span class="requiredField">*</span></label>
                       <select
@@ -205,7 +215,11 @@
                   <div class="col-md-4">
                     <div class="form-group mb-3">
 
-                      <app-select-dropdown [title]="'Choose City*'" [id]="'city'" [valueArray]="cityData" [selectedValue]="userData.user_city"> </app-select-dropdown>
+                      <app-select-dropdown [title]="'Choose City'" [id]="'city'" [formControlName]="'userCity'" [valueArray]="cityData" [selectedValue]="userData.user_city"> </app-select-dropdown>
+                      @if (updateForm.get('userCity').hasError('required') &&
+                    updateForm.get('userCity').touched) {
+                    <p style="color:red; margin-left:10px;">City is required.</p>
+                    }
 
 
                       <!-- <label class="form-label" for="city">Choose City<span class="requiredField">*</span></label>

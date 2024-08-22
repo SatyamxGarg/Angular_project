@@ -1,110 +1,3 @@
-
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { HttpService } from '../../services/http.service';
-// import { ToastrService } from 'ngx-toastr';
-// import { Router } from '@angular/router';
-// import { ReactiveFormsModule } from '@angular/forms';
-// import { RouterLink } from '@angular/router';
-
-// @Component({
-//   selector: 'app-updateprofile',
-//   standalone: true,
-//   imports:[ReactiveFormsModule,RouterLink],
-//   templateUrl: './updateprofile.component.html',
-//   styleUrls: ['./updateprofile.component.scss']
-// })
-// export class UpdateprofileComponent implements OnInit {
-
-//   user: any;
-//   updateProfileForm: FormGroup;
-
-//   constructor(
-//     private httpService: HttpService,
-//     private toastr: ToastrService,
-//     private router: Router,
-//     private fb: FormBuilder
-//   ) { 
-//     this.updateProfileForm = this.fb.group({
-//       firstName: ['', Validators.required],
-//       lastName: ['', Validators.required],
-//       emailAddress: ['', [Validators.required, Validators.email]],
-//       age: ['', Validators.required],
-//       gender: ['', Validators.required],
-//       phone: ['', Validators.required],
-//       country: ['', Validators.required],
-//       state: ['', Validators.required],
-//       city: ['', Validators.required]
-//     });
-//   }
-
-//   ngOnInit() {
-//     this.loadUserProfile();
-//   }
-
-//   loadUserProfile() {
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//       this.httpService.getUserProfile(token).subscribe({
-//         next: (response: any) => {
-//           if(response.status) {
-//             this.user = response.data[0];
-//             this.updateProfileForm.patchValue({
-//               firstName: this.user.user_first_name,
-//               lastName: this.user.user_last_name,
-//               emailAddress: this.user.user_email,
-//               age: this.user.user_age,
-//               gender: this.user.user_gender,
-//               phone: this.user.user_phone,
-//               country: this.user.user_country,
-//               state: this.user.user_state,
-//               city: this.user.user_city
-//             });
-//           } else {
-//             this.toastr.error(response.message);
-//             this.router.navigate(['/profile']);
-//           }
-//         },
-//         error: (error) => {
-//           this.toastr.error(error.error.message);
-//           this.router.navigate(['/profile']);
-//         }
-//       });
-//     } else {
-//       this.router.navigate(['/login']);
-//     }
-//   }
-
-//   onSubmit() {
-//     if (this.updateProfileForm.invalid) {
-//       this.toastr.error('Please fill out the form correctly.');
-//       return;
-//     }
-
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//       const updatedData = this.updateProfileForm.value;
-//       this.httpService.updateUserProfile(updatedData).subscribe({
-//         next: (response: any) => {
-//           if (response.status) {
-//             this.toastr.success('Profile updated successfully.');
-//             this.loadUserProfile(); // Reload the user profile to reflect the changes
-//           } else {
-//             this.toastr.error(response.message);
-//           }
-//         },
-//         error: (error) => {
-//           this.toastr.error(error.error.message);
-//         }
-//       });
-//     } else {
-//       this.router.navigate(['/login']);
-//     }
-//   }
-// }
-
-
-
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { HttpService } from '../../services/http.service';
@@ -112,6 +5,7 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  FormsModule,
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -123,7 +17,7 @@ import { ButtonComponent } from "../../common/components/UI/form-elements/button
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent],
+  imports: [RouterLink, ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent, FormsModule],
   templateUrl: './updateprofile.component.html',
   styleUrl: './updateprofile.component.scss',
 })
@@ -146,9 +40,9 @@ export class UpdateProfileComponent {
     this.updateForm = this.formBuilder.group({
       userFirstName: ['', Validators.required],
       userLastName: ['', Validators.required],
-      userCountry: '',
-      userState: '',
-      userCity: '',
+      userCountry: ['', Validators.required],
+      userState: ['', Validators.required],
+      userCity: ['', Validators.required],
       userPhone: ['', Validators.required],
       userGender: ['', Validators.required],
       age: ['', Validators.required],
@@ -201,6 +95,7 @@ export class UpdateProfileComponent {
         this.countryList =  this.countryList.map((obj:any) => {
           return {value:obj.country_name, display: obj.country_name}
         })
+        
       },
       error: (err: Error) => {
         console.log(err);
@@ -213,7 +108,7 @@ export class UpdateProfileComponent {
    * @returns {void}
    */
   changeCountryData(): void {
-    
+     this.updateForm.patchValue({ userState: '', userCity: '' });
     const value: any = this.updateForm.get('userCountry');
     const data = {
       user_country: value?.value,
@@ -224,6 +119,7 @@ export class UpdateProfileComponent {
         this.stateData =  this.stateData.map((obj:any) => {
           return {value:obj.state_name, display: obj.state_name}
         })
+        
       },
       error: (err: any) => {
         console.log(err);
@@ -236,6 +132,7 @@ export class UpdateProfileComponent {
    * @returns {void}
    */
   changeStateData(): void {
+    this.updateForm.patchValue({ userCity: '' });
     const value: any = this.updateForm.get('userState');
     if(!value?.value){
       this.cityData = []
@@ -281,5 +178,3 @@ export class UpdateProfileComponent {
     }
   }
 }
-
-

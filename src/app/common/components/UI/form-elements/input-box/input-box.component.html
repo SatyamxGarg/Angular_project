@@ -1,6 +1,18 @@
-<form class="example-form"> 
-<mat-form-field class="example-full-width">
+<!-- <mat-form-field class="example-full-width">
   <mat-label>{{title}}</mat-label>
-  <input matInput [placeholder]="placeholder" [value]="value" [id]="id">
+  <input matInput [formControlName]="formControlName" [placeholder]="placeholder" [value]="value" [id]="id">
+</mat-form-field> -->
+
+<mat-form-field class="example-full-width" >
+  <mat-label>{{ title }}<span class="requiredField">*</span></mat-label>
+  <input
+   
+   
+    [value]="value"
+    (input)="handleInputChange($event)"
+    [disabled]="disabled"
+    matInput
+    placeholder="{{ placeholder }}"
+  />
 </mat-form-field>
-</form>
+
