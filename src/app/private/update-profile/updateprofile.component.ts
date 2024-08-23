@@ -13,6 +13,7 @@ import { cloneSVG } from '@ant-design/icons-angular';
 import { InputBoxComponent } from "../../common/components/UI/form-elements/input-box/input-box.component";
 import { SelectDropdownComponent } from '../../common/components/UI/form-elements/select-dropdown/select-dropdown.component';
 import { ButtonComponent } from "../../common/components/UI/form-elements/button/button.component";
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-update-profile',
@@ -34,7 +35,8 @@ export class UpdateProfileComponent {
     private httpService: HttpService,
     private formBuilder: FormBuilder,
     private toster: ToastrService,
-    private route: Router
+    private route: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -172,6 +174,11 @@ export class UpdateProfileComponent {
       this.httpService.updateUserProfile(data).subscribe({
         next: (response: any) => {
           this.loader = false;
+          this.userService.setProfile({
+            firstName: response?.data[0].userFirstName || '',
+            lastName: response?.data[0].userLastName || '',
+            userRole: response?.data[0].userRoleName || '',
+          });
           this.toster.success(response.message);
           this.route.navigateByUrl("/");
         },

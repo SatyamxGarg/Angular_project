@@ -5,7 +5,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { NgbCollapseModule, NgbDropdownModule, NgbModule, NgbNav, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
 import { NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
-
+import { UserService } from '../../services/user.service';
 
 // project import
 
@@ -69,6 +69,7 @@ export class HeaderComponent {
   @Output() Customize = new EventEmitter();
   windowWidth: number;
   screenFull: boolean = true;
+  userProfile: any;
 
 
   //navCollapsed!: any;
@@ -77,6 +78,7 @@ export class HeaderComponent {
   // Constructor
   constructor(private iconService: IconService, private route: Router,   private httpService: HttpService,
     private toastr: ToastrService,
+    private userService: UserService
     ) {
     this.windowWidth = window.innerWidth;
     this.navCollapsedMob = false;
@@ -117,30 +119,13 @@ export class HeaderComponent {
 
 
 
-  ngOnInit() {
-    this.loadUserProfile();
-  }
-
-  loadUserProfile() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.httpService.getUserProfile(token).subscribe({
-        next: (response: any) => {
-          if (response.status) {
-            this.user = response.data[0];
-          } else {
-            this.toastr.error(response.message);
-            this.route.navigate(['/profile']);
-          }
-        },
-        error: (error) => {
-          this.toastr.error(error.error.message);
-          this.route.navigate(['/profile']);
-        }
-      });
-    } else {
-      this.route.navigate(['/login']);
-    }
+  ngOnInit(): void {
+    this.userService.userProfileObservable.subscribe({
+      next: (userProfile)=>{
+        this.userProfile = userProfile;
+      },
+      error: (err) => console.error('Error occured:',err)
+    });
   }
 
   // public method
