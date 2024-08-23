@@ -28,7 +28,8 @@ export class PrivateComponent {
       setTimeout(() => {
         this.navCollapsedMob = !this.navCollapsedMob;
       }, 100);
-    } else {
+    } 
+    else {
       this.navCollapsedMob = !this.navCollapsedMob;
     }
     if (document.querySelector('app-navigation.pc-sidebar')?.classList.contains('navbar-collapsed')) {

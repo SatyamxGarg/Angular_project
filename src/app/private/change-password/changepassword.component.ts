@@ -84,7 +84,6 @@ export class ChangePasswordComponent implements OnInit {
       error: (error) => {
         this.toastr.error(error.error.message);
         this.loader = false;
-
       }
     });
   }

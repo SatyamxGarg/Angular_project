@@ -38,6 +38,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from '../../privates/shared/components/breadcrumb/breadcrumb.component';
 import { CardComponent } from '../../privates/shared/components/card/card.component';
 import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { HttpService } from '../../services/http.service';
 
 
 @Component({
@@ -58,6 +60,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  user: any;
   // public props
   @Output() NavCollapse = new EventEmitter();
   @Output() NavCollapsedMob = new EventEmitter();
@@ -72,7 +75,9 @@ export class HeaderComponent {
   navCollapsedMob;
 
   // Constructor
-  constructor(private iconService: IconService,   private route: Router) {
+  constructor(private iconService: IconService, private route: Router,   private httpService: HttpService,
+    private toastr: ToastrService,
+    ) {
     this.windowWidth = window.innerWidth;
     this.navCollapsedMob = false;
     this.windowWidth = window.innerWidth;
@@ -102,11 +107,40 @@ export class HeaderComponent {
     );
   }
 
+  
   @HostListener('window:resize', ['$event'])
   // eslint-disable-next-line
   onResize(event: any): void {
     this.windowWidth = event.target.innerWidth;
     this.navCollapseMob();
+  }
+
+
+
+  ngOnInit() {
+    this.loadUserProfile();
+  }
+
+  loadUserProfile() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.httpService.getUserProfile(token).subscribe({
+        next: (response: any) => {
+          if (response.status) {
+            this.user = response.data[0];
+          } else {
+            this.toastr.error(response.message);
+            this.route.navigate(['/profile']);
+          }
+        },
+        error: (error) => {
+          this.toastr.error(error.error.message);
+          this.route.navigate(['/profile']);
+        }
+      });
+    } else {
+      this.route.navigate(['/login']);
+    }
   }
 
   // public method

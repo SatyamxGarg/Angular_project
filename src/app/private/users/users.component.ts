@@ -87,11 +87,12 @@ import { ColDef } from 'ag-grid-community';
 })
 export class UsersComponent implements OnInit {
   user!: Array<any>;
-  columnDefs: ColDef[] = [];
+  columnDefs: ColDef[] =[];
   defaultColDef: ColDef = {
     sortable: true,
     filter: false,
     resizable: true
+
   };
 
   constructor(
@@ -101,8 +102,8 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadUsers();
-    this.setColumnDefs();
+     this.loadUsers();
+     this.setColumnDefs();
   }
 
   loadUsers() {

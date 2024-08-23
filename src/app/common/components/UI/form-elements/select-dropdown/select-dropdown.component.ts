@@ -32,7 +32,7 @@ export class SelectDropdownComponent implements ControlValueAccessor{
   @Input() id: string='';
   @Input() selectedValue: string='';
   @Input() valueArray: any;
-  @Input() formControlName: any;
+  @Input() formControlName: string='';
   @Output() onBtnClick=new EventEmitter<any>();
   @Input() value: string='';
 

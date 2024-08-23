@@ -44,7 +44,7 @@ export class UpdateProfileComponent {
       userCountry: ['', Validators.required],
       userState: ['', Validators.required],
       userCity: ['', Validators.required],
-      userPhone: ['', Validators.required],
+      userPhone: ['', [ Validators.required,Validators.pattern('^[0-9]{10}$')]],
       userGender: ['', Validators.required],
       age: ['', Validators.required],
     });
@@ -173,7 +173,7 @@ export class UpdateProfileComponent {
         next: (response: any) => {
           this.loader = false;
           this.toster.success(response.message);
-          this.route.navigateByUrl("/")
+          this.route.navigateByUrl("/");
         },
         error: (err: any) => {
           console.log(err);

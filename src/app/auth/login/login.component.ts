@@ -84,7 +84,7 @@ export class LoginComponent {
       },
       error: (error) => {
         this.loader = false;
-        this.toastr.error(error.error.message)
+        this.toastr.error(error.error.message);
       },
     });
   }
