@@ -42,7 +42,7 @@
           </div>
           <div class="d-grid mt-4">
             <!-- <button type="button" (click)="onSubmit()" class="btn btn-primary" [disabled]="userForm.invalid">Login</button> -->
-            <app-button [title]="'Login'" (onBtnClick)="onSubmit()" [disable]="loader"></app-button>
+            <app-button [title]="'Login'" (onBtnClick)="onSubmit()" [disable]="userForm.invalid || loader"></app-button>
 
           </div>
           </form>

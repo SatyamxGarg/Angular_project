@@ -8,6 +8,7 @@ import { ChangePasswordComponent } from './change-password/changepassword.compon
 import { UpdateProfileComponent } from './update-profile/updateprofile.component';
 import { UsersComponent } from './users/users.component';
 import { EditUsersComponent } from './edit-users/edit-users.component';
+import { ListProjectsComponent } from './list-projects/list-projects.component';
 
 export const routes: Routes = [
 
@@ -33,6 +34,11 @@ export const routes: Routes = [
             {
                 path: 'users',
                 component: UsersComponent
+                
+            },
+            {
+                path: 'list-projects',
+                component: ListProjectsComponent
                 
             },
             {

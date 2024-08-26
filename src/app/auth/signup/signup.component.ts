@@ -60,8 +60,8 @@ export class SignupComponent {
 
   onSignup() {
 
-    if(this.loader) return
-    if (this.signupForm.invalid) {
+    // if(this.loader) return
+    if (this.loader || this.signupForm.invalid) {
       this.toastr.error('Please enter correct details.');
       return;
     }

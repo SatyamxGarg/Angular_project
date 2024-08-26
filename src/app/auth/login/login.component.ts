@@ -58,8 +58,8 @@ export class LoginComponent {
 
   onSubmit() {
 
-    if(this.loader) return
-    if (this.userForm.invalid) {
+    // if(this.loader) return
+    if (this.loader || this.userForm.invalid) {
       this.toastr.error('Please enter correct details.');
       return;
     }

@@ -72,7 +72,7 @@
             <a href="javascript:" class="text-primary">Privacy Policy</a>
           </p>
           <div class="d-grid mt-3">
-            <app-button [title]="'Create Account'" (onBtnClick)="onSignup()" [disable]="loader"></app-button>
+            <app-button [title]="'Create Account'" (onBtnClick)="onSignup()" [disable]="signupForm.invalid || loader"></app-button>
 
             <!-- <button type="button" (click)="onSignup()" [disabled]="signupForm.invalid" class="btn btn-primary">Create Account</button> -->
           </div>

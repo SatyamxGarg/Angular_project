@@ -174,10 +174,10 @@ export class UpdateProfileComponent {
       this.httpService.updateUserProfile(data).subscribe({
         next: (response: any) => {
           this.loader = false;
+          
           this.userService.setProfile({
-            firstName: response?.data[0].userFirstName || '',
-            lastName: response?.data[0].userLastName || '',
-            userRole: response?.data[0].userRoleName || '',
+            user_first_name: this.updateForm.value.userFirstName,
+            user_last_name: this.updateForm.value.userLastName,
           });
           this.toster.success(response.message);
           this.route.navigateByUrl("/");

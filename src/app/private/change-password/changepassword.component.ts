@@ -37,6 +37,7 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
     }, { validator: this.passwordMatchValidator });
+    
   }
 
   navigateToProfile() {
@@ -57,13 +58,12 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit() {
 
-    if(this.loader) return
-
-    
-    if (this.passwordForm.invalid) {
+     if (this.loader || this.passwordForm.invalid) {
       this.toastr.error('Please enter correct password.');
+      // provideToastr({preventDuplicates:true});
       return;
     }
+
     
     this.loader = true;
     const data = {

@@ -122,7 +122,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.userService.userProfileObservable.subscribe({
       next: (userProfile)=>{
-        this.userProfile = userProfile;
+        this.userProfile = userProfile;        
       },
       error: (err) => console.error('Error occured:',err)
     });

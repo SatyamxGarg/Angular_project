@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field class="selectClass">
   <mat-label>{{title}}<span class="requiredField">*</span></mat-label>
   <mat-select [(value)]="selectedValue" (selectionChange)="handleInputChange($event)">
     @for (item of valueArray; track item) {
