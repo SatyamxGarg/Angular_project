@@ -13,11 +13,12 @@ import { InputBoxComponent } from "../../common/components/UI/form-elements/inpu
 import { SelectDropdownComponent } from '../../common/components/UI/form-elements/select-dropdown/select-dropdown.component';
 import { ButtonComponent } from "../../common/components/UI/form-elements/button/button.component";
 import { UserService } from '../../services/user.service';
+import { DatePickerComponent } from '../../common/components/UI/form-elements/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-update-project',
   standalone: true,
-  imports: [ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent, FormsModule],
+  imports: [ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent, FormsModule,DatePickerComponent],
    templateUrl: './update-project.component.html',
    styleUrl: './update-project.component.scss'
 })
@@ -58,8 +59,8 @@ export class UpdateProjectComponent implements OnInit {
       repoTool: ['', Validators.required],
       repoUrl: ['', Validators.required],
       projectStatus: ['', Validators.required],
-      // startDate: ['', Validators.required],
-      // DeadlineDate: ['', Validators.required],
+      startDate: ['', Validators.required],
+      DeadlineDate: ['', Validators.required],
 });
   }
 
@@ -81,8 +82,8 @@ export class UpdateProjectComponent implements OnInit {
             projectUrl: response.data[0].management_url,
             repoTool: response.data[0].repo_tool,
             repoUrl: response.data[0].repo_url,
-            // startDate: response.data[0].project_startDate,
-            // DeadlineDate: response.data[0].project_deadlineDate,
+            startDate: response.data[0].project_startDate,
+            DeadlineDate: response.data[0].project_deadlineDate,
           });
         }
       },
@@ -97,6 +98,14 @@ export class UpdateProjectComponent implements OnInit {
 
     if (this.updateForm.valid) {
       this.loader = true;
+
+      const formatDate = (date: Date | null): string => {
+        if (!date) return '';
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        return `${year}/${month}/${day}`;
+      };
       const data = {
         project_name: this.updateForm.value.projectName,
         project_description: this.updateForm.value.projectDesc,
@@ -109,8 +118,8 @@ export class UpdateProjectComponent implements OnInit {
         management_url: this.updateForm.value.projectUrl,
         repo_tool: this.updateForm.value.repoTool,
         repo_url: this.updateForm.value.repoUrl,
-        // project_startDate: this.updateForm.value.startDate,
-        // project_deadlineDate: this.updateForm.value.DeadlineDate,
+        project_startDate: formatDate(this.updateForm.value.startDate),
+        project_deadlineDate: formatDate(this.updateForm.value.DeadlineDate),
       };
 
       this.httpService.updateProject(this.projectId, data).subscribe({

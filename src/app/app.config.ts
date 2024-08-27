@@ -6,6 +6,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { httpInterceptor } from './interceptors/http.interceptor';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr(),
     provideToastr({preventDuplicates:true}),
     provideAnimations(),
+    provideNativeDateAdapter(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([httpInterceptor])), provideAnimationsAsync()
   ],

@@ -61,7 +61,7 @@ export class ListProjectsComponent implements OnInit {
   }
 
   onUpdate(projectId: string) {
-    this.router.navigate(['/profile/list-projects/update-project/',projectId]);
+    this.router.navigate(['/profile/list-projects/update-project',projectId]);
   }
   
 

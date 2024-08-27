@@ -55,8 +55,8 @@ export class AddProjectsComponent {
       repoTool: ['', Validators.required],
       repoUrl: ['', Validators.required],
       status: ['', Validators.required],
-      // startDate: ['', Validators.required],
-      // DeadlineDate: ['', Validators.required],
+      startDate: ['', Validators.required],
+      DeadlineDate: ['', Validators.required],
     });
     
   }
@@ -65,30 +65,36 @@ export class AddProjectsComponent {
 
 
   onAdded() {
-
-    if(this.loader) return
+    if (this.loader) return;
 
     if (this.addForm.valid) {
-
       this.loader = true;
-   const token=localStorage.getItem("token");
-   const data = {
-    project_name: this.addForm.value.projectName,
-    project_description: this.addForm.value.projectDesc,
-    project_tech: this.addForm.value.projectTech,
-    project_status: this.addForm.value.status,
-    project_lead: this.addForm.value.projectLead,
-    project_manager: this.addForm.value.projectManager,
-    project_client: this.addForm.value.projectClient,
-    management_tool: this.addForm.value.mngmtTool,
-    management_url: this.addForm.value.projectUrl,
-    repo_tool: this.addForm.value.repoTool,
-    repo_url: this.addForm.value.repoUrl,
-    // project_startDate: this.addForm.value.startDate,
-    // project_deadlineDate: this.addForm.value.DeadlineDate,
+      const token = localStorage.getItem("token");
 
+      const formatDate = (date: Date | null): string => {
+        if (!date) return '';
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        return `${year}/${month}/${day}`;
+      };
 
-  };
+      const data = {
+        project_name: this.addForm.value.projectName,
+        project_description: this.addForm.value.projectDesc,
+        project_tech: this.addForm.value.projectTech,
+        project_status: this.addForm.value.status,
+        project_lead: this.addForm.value.projectLead,
+        project_manager: this.addForm.value.projectManager,
+        project_client: this.addForm.value.projectClient,
+        management_tool: this.addForm.value.mngmtTool,
+        management_url: this.addForm.value.projectUrl,
+        repo_tool: this.addForm.value.repoTool,
+        repo_url: this.addForm.value.repoUrl,
+        project_startDate: formatDate(this.addForm.value.startDate),
+        project_deadlineDate: formatDate(this.addForm.value.DeadlineDate),
+      };
+
       this.httpService.addProject(data).subscribe({
         next: (response: any) => {
           this.loader = false;
@@ -103,3 +109,93 @@ export class AddProjectsComponent {
     }
   }
 }
+
+
+// import { Component, OnInit } from '@angular/core';
+// import { Router } from '@angular/router';
+// import { HttpService } from '../../services/http.service';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { ToastrService } from 'ngx-toastr';
+
+// @Component({
+//   selector: 'app-add-projects',
+//   templateUrl: './add-projects.component.html',
+//   styleUrls: ['./add-projects.component.scss']
+// })
+// export class AddProjectsComponent implements OnInit {
+//   addForm: FormGroup;
+//   mngmtOptions = [{ value: 'Trello', display: 'Trello' }, { value: 'Zira', display: 'Zira' }];
+//   repoOptions = [{ value: 'Git Lab', display: 'Git Lab' }, { value: 'Bucket List', display: 'Bucket List' }];
+//   statusOptions = [{ value: 'coming Soon', display: 'Coming Soon' }, { value: 'Development Started', display: 'Development Started' }, { value: 'Launched', display: 'Launched' }];
+//   loader: boolean = false;
+
+//   constructor(
+//     private httpService: HttpService,
+//     private formBuilder: FormBuilder,
+//     private toster: ToastrService,
+//     private route: Router
+//   ) {}
+
+//   ngOnInit() {
+//     this.addForm = this.formBuilder.group({
+//       projectName: ['', Validators.required],
+//       projectTech: ['', Validators.required],
+//       projectDesc: ['', Validators.required],
+//       projectLead: ['', Validators.required],
+//       projectManager: ['', Validators.required],
+//       projectClient: ['', Validators.required],
+//       mngmtTool: ['', Validators.required],
+//       projectUrl: ['', Validators.required],
+//       repoTool: ['', Validators.required],
+//       repoUrl: ['', Validators.required],
+//       status: ['', Validators.required],
+//       startDate: ['', Validators.required],
+//       DeadlineDate: ['', Validators.required],
+//     });
+//   }
+
+//   onAdded() {
+//     if (this.loader) return;
+
+//     if (this.addForm.valid) {
+//       this.loader = true;
+//       const token = localStorage.getItem("token");
+
+//       const formatDate = (date: Date | null): string => {
+//         if (!date) return '';
+//         const year = date.getFullYear();
+//         const month = ('0' + (date.getMonth() + 1)).slice(-2);
+//         const day = ('0' + date.getDate()).slice(-2);
+//         return `${year}/${month}/${day}`;
+//       };
+
+//       const data = {
+//         project_name: this.addForm.value.projectName,
+//         project_description: this.addForm.value.projectDesc,
+//         project_tech: this.addForm.value.projectTech,
+//         project_status: this.addForm.value.status,
+//         project_lead: this.addForm.value.projectLead,
+//         project_manager: this.addForm.value.projectManager,
+//         project_client: this.addForm.value.projectClient,
+//         management_tool: this.addForm.value.mngmtTool,
+//         management_url: this.addForm.value.projectUrl,
+//         repo_tool: this.addForm.value.repoTool,
+//         repo_url: this.addForm.value.repoUrl,
+//         project_startDate: formatDate(this.addForm.value.startDate),
+//         project_deadlineDate: formatDate(this.addForm.value.DeadlineDate),
+//       };
+
+//       this.httpService.addProject(data).subscribe({
+//         next: (response: any) => {
+//           this.loader = false;
+//           this.toster.success(response.message);
+//           this.route.navigateByUrl("/profile/list-projects");
+//         },
+//         error: (err: any) => {
+//           console.log(err);
+//           this.loader = false;
+//         },
+//       });
+//     }
+//   }
+// }

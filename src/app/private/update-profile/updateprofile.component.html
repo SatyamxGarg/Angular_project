@@ -31,7 +31,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                  <app-input-box [id]="'emailAddress'" [type]="'number'" [formControlName]="'age'" [placeholder]="'Age'" [title]="'Age'"[value]="userData.user_age"></app-input-box>
+                  <app-input-box [id]="'emailAddress'" [type]="'number'" [formControlName]="'age'" [placeholder]="'Age'" [title]="'Age'" [value]="userData.user_age"></app-input-box>
                   @if (updateForm.get('age').hasError('required') &&
                   updateForm.get('age').touched) {
                   <span class="text-red-700 text-sm ml-2">Please enter Your Age</span>
