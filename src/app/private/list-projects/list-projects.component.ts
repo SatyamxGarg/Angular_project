@@ -9,22 +9,18 @@ import { ColDef } from 'ag-grid-community';
 @Component({
   selector: 'app-list-projects',
   standalone: true,
-  imports: [
-    CommonModule,
-    AgGridAngular
-  ],  templateUrl: './list-projects.component.html',
+  imports: [CommonModule, AgGridAngular],
+  templateUrl: './list-projects.component.html',
   styleUrl: './list-projects.component.scss'
 })
 
-
-export class  ListProjectsComponent implements OnInit {
-  user!: Array<any>;
-  columnDefs: ColDef[] =[];
+export class ListProjectsComponent implements OnInit {
+  user: Array<any> = [];
+  columnDefs: ColDef[] = [];
   defaultColDef: ColDef = {
     sortable: true,
     filter: false,
     resizable: true
-
   };
 
   constructor(
@@ -34,8 +30,8 @@ export class  ListProjectsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-     this.loadUsers();
-     this.setColumnDefs();
+    this.loadUsers();
+    this.setColumnDefs();
   }
 
   loadUsers() {
@@ -45,7 +41,6 @@ export class  ListProjectsComponent implements OnInit {
         next: (response: any) => {
           if (response.status) {
             this.user = response.data[0];
-            console.log(this.user);
           } else {
             this.toastr.error(response.message);
             this.router.navigate(['/list-projects']);
@@ -54,6 +49,32 @@ export class  ListProjectsComponent implements OnInit {
         error: (error) => {
           this.toastr.error(error.error.message);
           this.router.navigate(['/profile']);
+        }
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  onAdd() {
+    this.router.navigate(['/profile/list-projects/add-projects']);
+  }
+
+  onDelete(projectId: string) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.httpService.dltProject(projectId).subscribe({
+        next: (response: any) => {
+          if (response.status) {
+            this.user = this.user.filter(project => project.project_id !== projectId);
+            this.toastr.success('Project deleted successfully');
+          } else {
+            this.toastr.error(response.message);
+          }
+        },
+        error: (error: any) => {
+          this.toastr.error(error.error.message);
+          this.router.navigate(['/profile/list-projects']);
         }
       });
     } else {
@@ -77,7 +98,28 @@ export class  ListProjectsComponent implements OnInit {
       { headerName: 'REPOSITORY URL', field: 'repo_url' },
       { headerName: 'START DATE', field: 'project_startDate' },
       { headerName: 'DEADLINE DATE', field: 'project_deadlineDate' },
-           
+      {
+        headerName: 'Action',
+        cellRenderer: (params: any) => {
+          const projectId = params.data.project_id;
+          const button = document.createElement('button');
+          button.className = 'btn btn-danger';
+          button.style.marginLeft = '5px';
+          button.innerHTML = '<i class="fas fa-trash"></i>';
+
+          button.addEventListener('click', () => {
+            params.context.componentParent.onDelete(projectId);
+          });
+
+          return button;
+        },
+        width: 150,
+        cellRendererParams: {
+          context: {
+            componentParent: this
+          }
+        }
+      }
     ];
   }
 }

@@ -9,6 +9,7 @@ import { UpdateProfileComponent } from './update-profile/updateprofile.component
 import { UsersComponent } from './users/users.component';
 import { EditUsersComponent } from './edit-users/edit-users.component';
 import { ListProjectsComponent } from './list-projects/list-projects.component';
+import { AddProjectsComponent } from './add-projects/add-projects.component';
 
 export const routes: Routes = [
 
@@ -39,6 +40,11 @@ export const routes: Routes = [
             {
                 path: 'list-projects',
                 component: ListProjectsComponent
+                
+            },
+            {
+                path: 'list-projects/add-projects',
+                component: AddProjectsComponent
                 
             },
             {

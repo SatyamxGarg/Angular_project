@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css" />
 <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css" />
+
+<div style="display:flex;justify-content:space-between;">
 <h4 class="mb-3" style="margin-left:5px;">Projects List</h4>
+<button class="btn btn-primary" (click)="onAdd()" style="margin-right:300px;height:50px;margin-top:6px;"><i class="fa-solid fa-folder-plus"></i></button></div>
 <div class="row" style="display:flex;align-items: center; justify-content: center;">
    <div class="col-md-12 col-xl-8">
        <div class="card tbl-card">
@@ -11,7 +14,6 @@
                    [rowData]="user"
                    [columnDefs]="columnDefs"
                    [defaultColDef]="defaultColDef">
-
                </ag-grid-angular>
            </div>
        </div>

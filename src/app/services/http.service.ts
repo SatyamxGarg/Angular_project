@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +46,12 @@ export class HttpService {
    getAllProjects(body:any){
     return this.http.post("http://localhost/Angular_crud/em_be/api/v1/list-projects/",body); 
    }
+   addProject(body:any){
+    return this.http.post("http://localhost/Angular_crud/em_be/api/v1/add-projects/",body); 
+   }
+   dltProject(projectId: string) {
+    let params = new HttpParams().set('project_id', projectId);
+    return this.http.delete("http://localhost/Angular_crud/em_be/api/v1/del-projects/", { params });
+  }
 }
+
