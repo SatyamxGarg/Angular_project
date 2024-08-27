@@ -13,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withFetch()),
     provideToastr(),
+    provideToastr({preventDuplicates:true}),
     provideAnimations(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([httpInterceptor])), provideAnimationsAsync()

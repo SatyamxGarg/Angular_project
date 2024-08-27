@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { EditUsersComponent } from './edit-users/edit-users.component';
 import { ListProjectsComponent } from './list-projects/list-projects.component';
 import { AddProjectsComponent } from './add-projects/add-projects.component';
+import { UpdateProjectComponent } from './update-project/update-project.component';
 
 export const routes: Routes = [
 
@@ -45,6 +46,11 @@ export const routes: Routes = [
             {
                 path: 'list-projects/add-projects',
                 component: AddProjectsComponent
+                
+            },
+            {
+                path: 'list-projects/update-project/:id',
+                component: UpdateProjectComponent
                 
             },
             {

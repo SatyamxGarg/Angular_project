@@ -36,7 +36,7 @@ export class HttpService {
     return this.http.post("http://localhost/Angular_crud/em_be/api/v1/city/",body); 
    }
    getAllUsers(body:any){
-    return this.http.post("http://localhost/Angular_crud/em_be/api/v1/users/",body); 
+    return this.http.get("http://localhost/Angular_crud/em_be/api/v1/users/",body); 
 
    }
    getEditUser(body:any){
@@ -53,5 +53,13 @@ export class HttpService {
     let params = new HttpParams().set('project_id', projectId);
     return this.http.delete("http://localhost/Angular_crud/em_be/api/v1/del-projects/", { params });
   }
+  getProjectDetails(body:any,projectId: string){
+    let params = new HttpParams().set('project_id', projectId);
+    return this.http.get("http://localhost/Angular_crud/em_be/api/v1/get-project/", { params });
+  }
+  updateProject(projectId: string, body: any) {
+    let params = new HttpParams().set('project_id', projectId);
+    return this.http.put("http://localhost/Angular_crud/em_be/api/v1/update-project/", body, { params });
+}
 }
 

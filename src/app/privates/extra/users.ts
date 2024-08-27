@@ -88,3 +88,138 @@
 //     }
 //   }
 // }
+
+
+// import { Component } from '@angular/core';
+// import { Router, RouterLink } from '@angular/router';
+// import { HttpService } from '../../services/http.service';
+// import {
+//   FormBuilder,
+//   FormGroup,
+//   ReactiveFormsModule,
+//   FormsModule,
+//   Validators,
+// } from '@angular/forms';
+// import { ToastrService } from 'ngx-toastr';
+// import { cloneSVG } from '@ant-design/icons-angular';
+// import { InputBoxComponent } from "../../common/components/UI/form-elements/input-box/input-box.component";
+// import { SelectDropdownComponent } from '../../common/components/UI/form-elements/select-dropdown/select-dropdown.component';
+// import { ButtonComponent } from "../../common/components/UI/form-elements/button/button.component";
+// import { UserService } from '../../services/user.service';
+
+// @Component({
+//   selector: 'app-update-project',
+//   standalone: true,
+//   imports: [RouterLink, ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent, FormsModule],
+//   templateUrl: './update-project.component.html',
+//   styleUrl: './update-project.component.scss'
+// })
+// export class UpdateProjectComponent {
+//   userData: any;
+//   updateForm: any;
+//   mngmtOptions = [{value:'Trello',display:'Trello'},{value:'Zira',display:'Zira'}];
+//   repoOptions = [{value:'Git Lab',display:'Git Lab'},{value:'Bucket List',display:'Bucket List'}];
+//   statusOptions = [{value:'cooming Soon',display:'Cooming Soon'},{value:'Development Started',display:'Development Started'},{value:'Launched',display:'Launched'}];
+//   loader: boolean = false;
+ 
+//   constructor(
+//     private httpService: HttpService,
+//     private formBuilder: FormBuilder,
+//     private toster: ToastrService,
+//     private route: Router,
+//     private userService: UserService
+//   ) { }
+
+//   ngOnInit() {
+//     this.updateForm = this.formBuilder.group({
+//       projectName: ['', Validators.required],
+//       projectTech: ['', Validators.required],
+//       projectDesc: ['', Validators.required],
+//       projectLead: ['', Validators.required],
+//       projectManager: ['', Validators.required],
+//       projectClient: ['', Validators.required],
+//       mngmtTool: ['', Validators.required],
+//       projectUrl: ['', Validators.required],
+//       repoTool: ['', Validators.required],
+//       repoUrl: ['', Validators.required],
+//       status: ['', Validators.required],
+//       // startDate: ['', Validators.required],
+//       // DeadlineDate: ['', Validators.required],
+//     });
+    
+//   }
+
+
+//   /**
+//    * Fetch logged in user data.
+//    * @returns {void}
+//    */
+//   getUserData(): void {
+//     const token = localStorage.getItem("token");
+//     this.httpService.getAllProjects(token).subscribe({
+//       next: (response: any) => {
+//         this.userData = response.data[0];
+//         this.UpdateForm()
+//       },
+//       error: (err: any) => {
+//         console.log(err);
+//       },
+//     });
+//   }
+
+//   UpdateForm(): void {
+//     this.updateForm.patchValue({
+//     projectName: this.userData.project_name,
+//     project_description: this.userData.project_description,
+//     project_tech: this.userData.project_tech,
+//     project_status: this.userData.project_status,
+//     project_lead: this.userData.project_lead,
+//     project_manager: this.userData.project_manager,
+//     project_client: this.userData.project_client,
+//     management_tool: this.userData.management_tool,
+//     management_url: this.userData.management_url,
+//     repo_tool: this.userData.repo_tool,
+//     repo_url: this.userData.repo_url,
+//     // project_startDate: this.userData.project_startDate,
+//     // project_deadlineDate: this.userData.project_deadlineDate,
+//     });
+
+//   }
+
+//   onUpdate() {
+
+//     if(this.loader) return
+
+//     if (this.updateForm.valid) {
+//       this.loader = true;
+//       const data = {
+//         project_name: this.updateForm.value.projectName,
+//         project_description: this.updateForm.value.projectDesc,
+//         project_tech: this.updateForm.value.projectTech,
+//         project_status: this.updateForm.value.status,
+//         project_lead: this.updateForm.value.projectLead,
+//         project_manager: this.updateForm.value.projectManager,
+//         project_client: this.updateForm.value.projectClient,
+//         management_tool: this.updateForm.value.mngmtTool,
+//         management_url: this.updateForm.value.projectUrl,
+//         repo_tool: this.updateForm.value.repoTool,
+//         repo_url: this.updateForm.value.repoUrl,
+//         // project_startDate: this.updateForm.value.startDate,
+//         // project_deadlineDate: this.updateForm.value.DeadlineDate,
+    
+//       };
+//       this.httpService.updateProject(data).subscribe({
+//         next: (response: any) => {
+//           this.loader = false;
+         
+//           this.toster.success(response.message);
+//           this.route.navigateByUrl("/");
+//         },
+//         error: (err: any) => {
+//           console.log(err);
+//           this.loader = false;
+//         },
+//       });
+//     }
+//   }
+// }

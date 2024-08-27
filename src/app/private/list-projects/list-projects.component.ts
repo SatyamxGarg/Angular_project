@@ -60,6 +60,11 @@ export class ListProjectsComponent implements OnInit {
     this.router.navigate(['/profile/list-projects/add-projects']);
   }
 
+  onUpdate(projectId: string) {
+    this.router.navigate(['/profile/list-projects/update-project/',projectId]);
+  }
+  
+
   onDelete(projectId: string) {
     const token = localStorage.getItem('token');
     if (token) {
@@ -82,6 +87,46 @@ export class ListProjectsComponent implements OnInit {
     }
   }
 
+  // setColumnDefs() {
+  //   this.columnDefs = [
+  //     { headerName: 'Sr No.', valueGetter: 'node.rowIndex + 1', width: 80, sortable: false },
+  //     { headerName: 'PROJECT NAME', field: 'project_name' },
+  //     { headerName: 'PROJECT DESCRIPTION', field: 'project_description' },
+  //     { headerName: 'PROJECT TECH', field: 'project_tech' },
+  //     { headerName: 'STATUS', field: 'project_status' },
+  //     { headerName: 'PROJECT LEAD', field: 'project_lead' },
+  //     { headerName: 'PROJECT MANAGER', field: 'project_manager' },
+  //     { headerName: 'PROJECT CLIENT', field: 'project_client' },
+  //     { headerName: 'MANAGEMENT TOOL', field: 'management_tool' },
+  //     { headerName: 'MANAGEMENT URL', field: 'management_url' },
+  //     { headerName: 'REPOSITORY TOOL', field: 'repo_tool' },
+  //     { headerName: 'REPOSITORY URL', field: 'repo_url' },
+  //     { headerName: 'START DATE', field: 'project_startDate' },
+  //     { headerName: 'DEADLINE DATE', field: 'project_deadlineDate' },
+  //     {
+  //       headerName: 'Action',
+  //       cellRenderer: (params: any) => {
+  //         const projectId = params.data.project_id;
+  //         const button = document.createElement('button');
+  //         button.className = 'btn btn-danger';
+  //         button.style.marginLeft = '5px';
+  //         button.innerHTML = '<i class="fas fa-trash"></i>';
+
+  //         button.addEventListener('click', () => {
+  //           params.context.componentParent.onDelete(projectId);
+  //         });
+
+  //         return button;
+  //       },
+  //       width: 150,
+  //       cellRendererParams: {
+  //         context: {
+  //           componentParent: this
+  //         }
+  //       }
+  //     }
+  //   ];
+  // }
   setColumnDefs() {
     this.columnDefs = [
       { headerName: 'Sr No.', valueGetter: 'node.rowIndex + 1', width: 80, sortable: false },
@@ -102,18 +147,30 @@ export class ListProjectsComponent implements OnInit {
         headerName: 'Action',
         cellRenderer: (params: any) => {
           const projectId = params.data.project_id;
-          const button = document.createElement('button');
-          button.className = 'btn btn-danger';
-          button.style.marginLeft = '5px';
-          button.innerHTML = '<i class="fas fa-trash"></i>';
-
-          button.addEventListener('click', () => {
+  
+          const updateButton = document.createElement('button');
+          updateButton.className = 'btn btn-primary';
+          updateButton.style.marginLeft = '5px';
+          updateButton.innerHTML = '<i class="fas fa-edit"></i>';
+          updateButton.addEventListener('click', () => {
+            params.context.componentParent.onUpdate(projectId);
+          });
+  
+          const deleteButton = document.createElement('button');
+          deleteButton.className = 'btn btn-danger';
+          deleteButton.style.marginLeft = '5px';
+          deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+          deleteButton.addEventListener('click', () => {
             params.context.componentParent.onDelete(projectId);
           });
-
-          return button;
+  
+          const buttonContainer = document.createElement('div');
+          buttonContainer.appendChild(updateButton);
+          buttonContainer.appendChild(deleteButton);
+  
+          return buttonContainer;
         },
-        width: 150,
+        width: 200, 
         cellRendererParams: {
           context: {
             componentParent: this
@@ -122,4 +179,5 @@ export class ListProjectsComponent implements OnInit {
       }
     ];
   }
+  
 }
