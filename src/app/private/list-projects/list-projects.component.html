@@ -1,23 +1,81 @@
 <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css" />
 <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css" />
 
-<div style="display:flex;justify-content:space-between;">
-<h4 class="mb-3" style="margin-left:5px;">Projects List</h4>
-<button class="btn btn-primary" (click)="onAdd()" style="margin-right:300px;height:50px;margin-top:6px;"><i class="fa-solid fa-folder-plus"></i></button></div>
-<div class="row" style="display:flex;align-items: center; justify-content: center;">
-   <div class="col-md-12 col-xl-8">
-       <div class="card tbl-card">
-           <div class="ag-theme-alpine" style="height: 800px; width: 100%;">
-               <ag-grid-angular
-                   style="width: 100%; height: 100%;"
-                   class="ag-theme-alpine"
-                   [rowData]="user"
-                   [columnDefs]="columnDefs"
-                   [defaultColDef]="defaultColDef"
-                   [pagination]="true"
-                   [paginationPageSize]="10">
-               </ag-grid-angular>
-           </div>
-       </div>
-   </div>
+<!-- <div style="display:flex;justify-content:space-between;">
+    <h4 class="mb-3" style="margin-left:5px;">Projects List</h4>
+    <button class="btn btn-primary" (click)="onAdd()" style="margin-right:300px;height:50px;margin-top:6px;">
+      <i class="fa-solid fa-folder-plus"></i>
+    </button>
+  </div>
+  <div class="row" style="display:flex;align-items: center; justify-content: center;">
+    <div class="col-md-12 col-xl-8">
+      <div class="card tbl-card">
+        <div style="margin-bottom: 10px;">
+          <input 
+            type="text" 
+            placeholder="Search Projects..." 
+            (input)="onSearch($event.target)"
+            style="width: 100%; padding: 8px;"
+          />
+        </div>
+        <div class="ag-theme-alpine" style="height: 800px; width: 100%;">
+          <ag-grid-angular
+            style="width: 100%; height: 100%;"
+            class="ag-theme-alpine"
+            [rowData]="user"
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            [pagination]="true"
+            [paginationPageSize]="10"
+            (gridReady)="onGridReady($event)"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #e0e0e0;">
+    <h4 class="mb-3" style="margin: 0;">Projects List</h4>
+
+    <button class="btn btn-primary" (click)="onAdd()" style="height: 40px; padding: 0 20px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-folder-plus" style="font-size: 16px;"></i>
+        <span style="font-size: 14px;">Add Project</span>
+    </button>
 </div>
+
+<!-- Main content area -->
+<div class="row" style="display: flex; justify-content: center; padding: 20px;">
+    <div class="col-md-12 col-xl-8">
+        <!-- Card container -->
+        <div class="card tbl-card" style="padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <!-- Search input -->
+            <div style="margin-bottom: 20px;">
+                <input 
+                    type="text" 
+                    placeholder="Search Projects..." 
+                    (input)="onSearch($event.target)"
+                    style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 14px;"
+                />
+            </div>
+            
+            <div class="ag-theme-alpine" style="height: 500px; width: 100%; border-radius: 8px; overflow: hidden;">
+                <ag-grid-angular
+                    style="width: 100%; height: 100%;"
+                    class="ag-theme-alpine"
+                    [rowData]="user"
+                    [columnDefs]="columnDefs"
+                    [defaultColDef]="defaultColDef"
+                    [pagination]="true"
+                    [paginationPageSize]="10"
+                    (gridReady)="onGridReady($event)"
+                >
+                </ag-grid-angular>
+            </div>
+            
+        </div>
+    </div>
+</div>
+  

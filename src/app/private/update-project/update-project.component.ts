@@ -183,13 +183,16 @@ export class UpdateProjectComponent implements OnInit {
         next: (response: any) => {
           this.loader = false;
           this.toastr.success(response.message);
-          this.route.navigateByUrl("/profile/list-projects");
+          this.route.navigateByUrl("/profile/projects");
         },
         error: (err: any) => {
           console.error(err);
           this.loader = false;
         },
       });
+    }
+    else{
+      this.toastr.error("Enter All The Necessary Details");
     }
   }
 }

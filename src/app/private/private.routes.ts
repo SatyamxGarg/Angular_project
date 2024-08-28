@@ -39,17 +39,17 @@ export const routes: Routes = [
                 
             },
             {
-                path: 'list-projects',
+                path: 'projects',
                 component: ListProjectsComponent
                 
             },
             {
-                path: 'list-projects/add-projects',
+                path: 'projects/add-projects',
                 component: AddProjectsComponent
                 
             },
             {
-                path: 'list-projects/update-project/:id',
+                path: 'projects/update-project/:id',
                 component: UpdateProjectComponent
                 
             },

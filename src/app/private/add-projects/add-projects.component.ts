@@ -99,13 +99,16 @@ export class AddProjectsComponent {
         next: (response: any) => {
           this.loader = false;
           this.toster.success(response.message);
-          this.route.navigateByUrl("/profile/list-projects");
+          this.route.navigateByUrl("/profile/projects");
         },
         error: (err: any) => {
           console.log(err);
           this.loader = false;
         },
       });
+    }
+    else{
+      this.toster.error("Enter All The Necessary Details");
     }
   }
 }

@@ -7,7 +7,7 @@
   </mat-form-field> -->
 
   <mat-form-field>
-    <mat-label>{{ title }}<span class="requiredField">*</span></mat-label>
+    <mat-label>{{ title }}<span class="requiredField"style="color:red;"> *</span></mat-label>
     <input matInput [matDatepicker]="picker" (dateChange)="handleDateChange($event)" [value]="values">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

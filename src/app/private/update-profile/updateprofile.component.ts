@@ -188,5 +188,8 @@ export class UpdateProfileComponent {
         },
       });
     }
+    else{
+      this.toster.error("Enter All The Necessary Details");
+    }
   }
 }
