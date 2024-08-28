@@ -14,6 +14,7 @@ import { SelectDropdownComponent } from '../../common/components/UI/form-element
 import { ButtonComponent } from "../../common/components/UI/form-elements/button/button.component";
 import { UserService } from '../../services/user.service';
 import { DatePickerComponent } from '../../common/components/UI/form-elements/date-picker/date-picker.component';
+import { cloneSVG } from '@ant-design/icons-angular';
 
 @Component({
   selector: 'app-update-project',
@@ -64,34 +65,89 @@ export class UpdateProjectComponent implements OnInit {
 });
   }
 
+  // getProjectDetails(projectId: string) {
+  //   const token = localStorage.getItem('token');
+  //   this.httpService.getProjectDetails(token,projectId).subscribe({
+  //     next: (response: any) => {
+
+  //       const formatDate = (date: Date | null): string => {
+  //         if (!date) return '';
+  //         const year = date.getFullYear();
+  //         const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  //         const day = ('0' + date.getDate()).slice(-2);
+  //         return `${month}-${date}-${year}`;
+  //       };
+  
+  //       if (response.data[0]) {
+  //         this.userData = response.data[0]
+  //         this.updateForm.patchValue({
+  //           projectName: response.data[0].project_name,
+  //           projectDesc: response.data[0].project_description,
+  //           projectTech: response.data[0].project_tech,
+  //           projectStatus: response.data[0].project_status,
+  //           projectLead: response.data[0].project_lead,
+  //           projectManager: response.data[0].project_manager,
+  //           projectClient: response.data[0].project_client,
+  //           mngmtTool: response.data[0].management_tool,
+  //           projectUrl: response.data[0].management_url,
+  //           repoTool: response.data[0].repo_tool,
+  //           repoUrl: response.data[0].repo_url,
+  //           // startDate: response.data[0].project_startDate,
+  //           startDate: formatDate(response.data[0].project_startDate),
+  //           // DeadlineDate: response.data[0].project_deadlineDate,
+  //           DFeadlineDate: formatDate(response.data[0].project_deadlineDate),
+
+  //         });
+  //       }
+  //     },
+  //     error: (err: any) => {
+  //       console.error(err);
+  //     },
+  //   });
+  // }
   getProjectDetails(projectId: string) {
     const token = localStorage.getItem('token');
-    this.httpService.getProjectDetails(token,projectId).subscribe({
-      next: (response: any) => {
-        if (response.data[0]) {
-          this.userData = response.data[0]
-          this.updateForm.patchValue({
-            projectName: response.data[0].project_name,
-            projectDesc: response.data[0].project_description,
-            projectTech: response.data[0].project_tech,
-            projectStatus: response.data[0].project_status,
-            projectLead: response.data[0].project_lead,
-            projectManager: response.data[0].project_manager,
-            projectClient: response.data[0].project_client,
-            mngmtTool: response.data[0].management_tool,
-            projectUrl: response.data[0].management_url,
-            repoTool: response.data[0].repo_tool,
-            repoUrl: response.data[0].repo_url,
-            startDate: response.data[0].project_startDate,
-            DeadlineDate: response.data[0].project_deadlineDate,
-          });
-        }
-      },
-      error: (err: any) => {
-        console.error(err);
-      },
+    this.httpService.getProjectDetails(token, projectId).subscribe({
+        next: (response: any) => {
+          const formatDate1 = (dateStr: string | null): Date => {
+            if (!dateStr) return new Date();
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return new Date(); 
+            return date;
+        };
+        const formatDateString = (date: Date): string => {
+            const year = date.getFullYear();
+            const month = ('0' + (date.getMonth() + 1)).slice(-2);
+            const day = ('0' + date.getDate()).slice(-2);
+            return `${month}-${day}-${year}`;
+        };
+        
+
+            if (response.data[0]) {
+                this.userData = response.data[0];
+                this.updateForm.patchValue({
+                    projectName: response.data[0].project_name,
+                    projectDesc: response.data[0].project_description,
+                    projectTech: response.data[0].project_tech,
+                    projectStatus: response.data[0].project_status,
+                    projectLead: response.data[0].project_lead,
+                    projectManager: response.data[0].project_manager,
+                    projectClient: response.data[0].project_client,
+                    mngmtTool: response.data[0].management_tool,
+                    projectUrl: response.data[0].management_url,
+                    repoTool: response.data[0].repo_tool,
+                    repoUrl: response.data[0].repo_url,
+                    startDate: formatDate1(response.data[0].project_startDate),
+                    DeadlineDate: formatDate1(response.data[0].project_deadlineDate),
+                });
+            }
+        },
+        error: (err: any) => {
+            console.error(err);
+        },
     });
-  }
+}
+
 
   onUpdate() {
     if (this.loader || !this.projectId) return;
@@ -102,9 +158,10 @@ export class UpdateProjectComponent implements OnInit {
       const formatDate = (date: Date | null): string => {
         if (!date) return '';
         const year = date.getFullYear();
+        
         const month = ('0' + (date.getMonth() + 1)).slice(-2);
         const day = ('0' + date.getDate()).slice(-2);
-        return `${year}/${month}/${day}`;
+        return `${year}-${month}-${day}`;
       };
       const data = {
         project_name: this.updateForm.value.projectName,

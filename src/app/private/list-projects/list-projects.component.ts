@@ -129,7 +129,7 @@ export class ListProjectsComponent implements OnInit {
   // }
   setColumnDefs() {
     this.columnDefs = [
-      { headerName: 'Sr No.', valueGetter: 'node.rowIndex + 1', width: 80, sortable: false },
+      { headerName: 'Sr No.', valueGetter: 'node.rowIndex + 1', width: 80, sortable: false, pinned: 'left', suppressMovable:true },
       { headerName: 'PROJECT NAME', field: 'project_name' },
       { headerName: 'PROJECT DESCRIPTION', field: 'project_description' },
       { headerName: 'PROJECT TECH', field: 'project_tech' },
@@ -171,6 +171,8 @@ export class ListProjectsComponent implements OnInit {
           return buttonContainer;
         },
         width: 200, 
+        pinned: 'right',
+        sortable: false,
         cellRendererParams: {
           context: {
             componentParent: this
