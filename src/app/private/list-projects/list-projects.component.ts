@@ -239,7 +239,7 @@ export class ListProjectsComponent implements OnInit {
         },
         error: (error) => {
           this.toastr.error(error.error.message);
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/profile/projects']);
         }
       });
     } else {

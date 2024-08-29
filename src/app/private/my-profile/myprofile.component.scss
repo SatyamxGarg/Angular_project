@@ -131,7 +131,6 @@
 
 
 
-@import '../../../scss/settings/color-variables.scss';
 
 .auth-main {
   display: flex;
@@ -156,7 +155,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba($white, 0.2);
+    background: rgba(#fff, 0.2);
     backdrop-filter: blur(16px);
   }
 

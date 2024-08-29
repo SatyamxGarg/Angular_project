@@ -156,6 +156,11 @@ logout(){
       url:'/profile'
     },
     {
+      icon: 'user',
+      title: 'View Projects',
+      url:'/profile/projects'
+    },
+    {
       icon: 'lock',
       title: 'Change Password',
       url:'/profile/change-password'
