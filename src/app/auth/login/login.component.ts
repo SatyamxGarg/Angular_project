@@ -2,12 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { config } from 'rxjs';
 import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
-// import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { InputBoxComponent } from '../../common/components/UI/form-elements/input-box/input-box.component';
 import { ButtonComponent } from '../../common/components/UI/form-elements/button/button.component';
@@ -19,7 +16,7 @@ import { ButtonComponent } from '../../common/components/UI/form-elements/button
   styleUrl: './login.component.scss'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   loader: boolean=false;
 
@@ -53,7 +50,7 @@ export class LoginComponent {
     })
 
   }
-  ngOnInIt() {
+  ngOnInit() {
   }
 
   onSubmit() {
