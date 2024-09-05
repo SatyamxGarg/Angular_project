@@ -14,23 +14,26 @@ import { InputBoxComponent } from "../../common/components/UI/form-elements/inpu
 import { SelectDropdownComponent } from '../../common/components/UI/form-elements/select-dropdown/select-dropdown.component';
 import { ButtonComponent } from "../../common/components/UI/form-elements/button/button.component";
 import { UserService } from '../../services/user.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent, FormsModule],
+  imports: [RouterLink, ReactiveFormsModule, InputBoxComponent, SelectDropdownComponent, ButtonComponent, FormsModule,MatFormFieldModule, MatSelectModule, MatInputModule],
   templateUrl: './updateprofile.component.html',
   styleUrl: './updateprofile.component.scss',
 })
 export class UpdateProfileComponent {
+  loading: boolean = true;
   userData: any;
   updateForm: any;
   countryList!: Array<any>;
   stateData!: Array<any>;
   cityData!: Array<any>;
-  genderOptions = [{value:'male',display:'Male'},{value:'female',display:'Female'}];
+  genderOptions = [{value:'MALE',display:'Male'},{value:'FEMALE',display:'Female'}];
   loader: boolean = false;
- 
   constructor(
     private httpService: HttpService,
     private formBuilder: FormBuilder,
@@ -62,8 +65,9 @@ export class UpdateProfileComponent {
     const token = localStorage.getItem("token");
     this.httpService.getUserProfile(token).subscribe({
       next: (response: any) => {
-        this.userData = response.data[0];
+        this.userData = response.data;
         this.UpdateForm()
+        this.loading = false;
       },
       error: (err: any) => {
         console.log(err);
@@ -73,18 +77,17 @@ export class UpdateProfileComponent {
 
   UpdateForm(): void {
     this.updateForm.patchValue({
-      userFirstName: this.userData.user_first_name,
-      userLastName: this.userData.user_last_name,
-      age: this.userData.user_age,
-      userGender: this.userData.user_gender,
-      userPhone: this.userData.user_phone,
-      userCountry: this.userData.user_country,
-      userState: this.userData.user_state,
-      userCity: this.userData.user_city
+      userFirstName: this.userData.user.userFirstName,
+      userLastName: this.userData.user.userLastName,
+      age: this.userData.user.userAge,
+      userGender: this.userData.user.userGender,
+      userPhone: this.userData.user.userPhone,
+      userCountry: this.userData.user.userCountry,
+      userState: this.userData.user.userState,
+      userCity: this.userData.user.userCity
     });
-
     this.changeCountryData();
-    this.changeStateData();
+    
   }
 
   /**
@@ -94,11 +97,11 @@ export class UpdateProfileComponent {
   fetchCountryData(): void {
     this.httpService.country().subscribe({
       next: (response: any) => {
-        this.countryList = response.data[0];
+        this.countryList = response?.data?.countries;
         this.countryList =  this.countryList.map((obj:any) => {
-          return {value:obj.country_name, display: obj.country_name}
+          return {value:obj.countryName, display: obj.countryName}
         })
-        
+        this.changeStateData();
       },
       error: (err: Error) => {
         console.log(err);
@@ -113,15 +116,16 @@ export class UpdateProfileComponent {
   changeCountryData(): void {
     const value: any = this.updateForm.get('userCountry');
     const data = {
-      user_country: value?.value,
+      userCountry: value?.value,
     };
+   
     this.httpService.state(data)?.subscribe({
       next: (response: any) => {
-        this.stateData = response.data[0];
+        this.stateData = response?.data?.states;
+
         this.stateData =  this.stateData.map((obj:any) => {
-          return {value:obj.state_name, display: obj.state_name}
+          return {value:obj.stateName, display: obj.stateName}
         })
-        
       },
       error: (err: any) => {
         console.log(err);
@@ -140,13 +144,13 @@ export class UpdateProfileComponent {
       return
     }
     const data = {
-      user_state: value?.value,
+      userState: value?.value,
     };
     this.httpService.city(data)?.subscribe({
       next: (response: any) => {
-        this.cityData = response.data[0];
+        this.cityData = response?.data?.cities;
         this.cityData =  this.cityData.map((obj:any) => {
-          return {value:obj.city_name, display: obj.city_name}
+          return {value:obj.cityName, display: obj.cityName}
         })
       },
       error: (err: any) => {
@@ -157,19 +161,20 @@ export class UpdateProfileComponent {
 
   onUpdate() {
 
+    console.log("on update running")
     if(this.loader) return
 
     if (this.updateForm.valid) {
       this.loader = true;
       const data = {
-        user_first_name: this.updateForm.value.userFirstName,
-        user_last_name: this.updateForm.value.userLastName,
-        user_gender: this.updateForm.value.userGender,
-        user_country: this.updateForm.value.userCountry,
-        user_state: this.updateForm.value.userState,
-        user_city: this.updateForm.value.userCity,
-        user_age: this.updateForm.value.age,
-        user_phone: this.updateForm.value.userPhone,
+        userFirstName: this.updateForm.value.userFirstName,
+        userLastName: this.updateForm.value.userLastName,
+        userGender: this.updateForm.value.userGender,
+        userCountry: this.updateForm.value.userCountry,
+        userState: this.updateForm.value.userState,
+        userCity: this.updateForm.value.userCity,
+        userAge: parseInt(this.updateForm.value.age),
+        userPhone: this.updateForm.value.userPhone,
       };
       this.httpService.updateUserProfile(data).subscribe({
         next: (response: any) => {

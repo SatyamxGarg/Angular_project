@@ -51,7 +51,7 @@ export class UpdateProjectComponent implements OnInit {
     this.updateForm = this.formBuilder.group({
       projectName: ['', Validators.required],
       projectTech: ['', Validators.required],
-      projectDesc: ['', Validators.required],
+      projectDescription: ['', Validators.required],
       projectLead: ['', Validators.required],
       projectManager: ['', Validators.required],
       projectClient: ['', Validators.required],
@@ -126,19 +126,19 @@ export class UpdateProjectComponent implements OnInit {
             if (response.data[0]) {
                 this.userData = response.data[0];
                 this.updateForm.patchValue({
-                    projectName: response.data[0].project_name,
-                    projectDesc: response.data[0].project_description,
-                    projectTech: response.data[0].project_tech,
-                    projectStatus: response.data[0].project_status,
-                    projectLead: response.data[0].project_lead,
-                    projectManager: response.data[0].project_manager,
-                    projectClient: response.data[0].project_client,
-                    mngmtTool: response.data[0].management_tool,
-                    projectUrl: response.data[0].management_url,
-                    repoTool: response.data[0].repo_tool,
-                    repoUrl: response.data[0].repo_url,
-                    startDate: formatDate1(response.data[0].project_startDate),
-                    DeadlineDate: formatDate1(response.data[0].project_deadlineDate),
+                    projectName: response.data[0].projectName,
+                    projectDescription: response.data[0].projectDescription,
+                    projectTech: response.data[0].projectTech,
+                    projectStatus: response.data[0].projectStatus,
+                    projectLead: response.data[0].projectLead,
+                    projectManager: response.data[0].projectManager,
+                    projectClient: response.data[0].projectClient,
+                    mngmtTool: response.data[0].managementTool,
+                    projectUrl: response.data[0].managementUrl,
+                    repoTool: response.data[0].repoTool,
+                    repoUrl: response.data[0].repoUrl,
+                    startDate: formatDate1(response.data[0].projectStartDate),
+                    DeadlineDate: formatDate1(response.data[0].projectDeadlineDate),
                 });
             }
         },
@@ -164,19 +164,19 @@ export class UpdateProjectComponent implements OnInit {
         return `${year}-${month}-${day}`;
       };
       const data = {
-        project_name: this.updateForm.value.projectName,
-        project_description: this.updateForm.value.projectDesc,
-        project_tech: this.updateForm.value.projectTech,
-        project_status: this.updateForm.value.projectStatus,
-        project_lead: this.updateForm.value.projectLead,
-        project_manager: this.updateForm.value.projectManager,
-        project_client: this.updateForm.value.projectClient,
-        management_tool: this.updateForm.value.mngmtTool,
-        management_url: this.updateForm.value.projectUrl,
-        repo_tool: this.updateForm.value.repoTool,
-        repo_url: this.updateForm.value.repoUrl,
-        project_startDate: formatDate(this.updateForm.value.startDate),
-        project_deadlineDate: formatDate(this.updateForm.value.DeadlineDate),
+        projectName: this.updateForm.value.projectName,
+        projectDescription: this.updateForm.value.projectDescription,
+        projectTech: this.updateForm.value.projectTech,
+        projectStatus: this.updateForm.value.projectStatus,
+        projectLead: this.updateForm.value.projectLead,
+        projectManager: this.updateForm.value.projectManager,
+        projectClient: this.updateForm.value.projectClient,
+        managementTool: this.updateForm.value.mngmtTool,
+        managementUrl: this.updateForm.value.projectUrl,
+        repoTool: this.updateForm.value.repoTool,
+        repoUrl: this.updateForm.value.repoUrl,
+        projectStartDate: formatDate(this.updateForm.value.startDate),
+        projectDeadlineDate: formatDate(this.updateForm.value.DeadlineDate),
       };
 
       this.httpService.updateProject(this.projectId, data).subscribe({

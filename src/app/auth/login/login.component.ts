@@ -65,13 +65,13 @@ export class LoginComponent implements OnInit{
     this.loader = true;
 
     const data = {
-      user_email: this.userForm.value.email,
-      user_password: this.userForm.value.password
+      userEmail: this.userForm.value.email,
+      userPassword: this.userForm.value.password
     };
     this.httpService.loginPost(data).subscribe({
       next: (response: any) => {
         this.loader = false;
-        if (!response.status) {
+        if (!response.statusCode) {
           this.toastr.error(response.message)
           return
         }

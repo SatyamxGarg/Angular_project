@@ -15,7 +15,7 @@
 
                 <app-input-box [id]="'projectName'" [type]="'text'" [formControlName]="'projectName'"
                   [placeholder]="'Enter Project Name'" [title]="'Project Name'"
-                  [value]="userData.project_name"></app-input-box>
+                  [value]="userData.projectName"></app-input-box>
                 <!-- class="form-control" -->
                 @if (updateForm.get('projectName').hasError('required') &&
                 updateForm.get('projectName').touched) {
@@ -25,7 +25,7 @@
               <div class="col-md-6">
                 <app-input-box [id]="'projectTech'" [type]="'text'" [formControlName]="'projectTech'"
                   [placeholder]="'Enter Tech Name'" [title]="'Technology'"
-                  [value]="userData.project_tech"></app-input-box>
+                  [value]="userData.projectTech"></app-input-box>
                 @if (updateForm.get('projectTech').hasError('required') &&
                 updateForm.get('projectTech').touched) {
                 <span class="text-red-700 text-sm ml-2">Please Enter Technology Name.</span>
@@ -35,11 +35,11 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <app-input-box [id]="'projectDesc'" [type]="'text'" [formControlName]="'projectDesc'"
+                <app-input-box [id]="'projectDescription'" [type]="'text'" [formControlName]="'projectDescription'"
                   [placeholder]="'Enter Description'" [title]="'Description'"
-                  [value]="userData.project_description"></app-input-box>
-                @if (updateForm.get('projectDesc').hasError('required') &&
-                updateForm.get('projectDesc').touched) {
+                  [value]="userData.projectDescription"></app-input-box>
+                @if (updateForm.get('projectDescription').hasError('required') &&
+                updateForm.get('projectDescription').touched) {
                 <span class="text-red-700 text-sm ml-2">Please enter Project Description.</span>
                 }
               </div>
@@ -47,7 +47,7 @@
               <div class="col-md-6">
                 <app-input-box [id]="'projectLead'" [type]="'text'" [formControlName]="'projectLead'"
                   [placeholder]="'Project Lead Name'" [title]="'Project Lead'"
-                  [value]="userData.project_lead"></app-input-box>
+                  [value]="userData.projectLead"></app-input-box>
                 @if (updateForm.get('projectLead').hasError('required') &&
                 updateForm.get('projectLead').touched) {
                 <span class="text-red-700 text-sm ml-2">Please enter Project Lead Name.</span>
@@ -60,7 +60,7 @@
               <div class="col-md-6">
                 <app-input-box [id]="'projectManager'" [type]="'text'" [formControlName]="'projectManager'"
                   [placeholder]="'Enter Manager Name'" [title]="'Project Manager'"
-                  [value]="userData.project_manager"></app-input-box>
+                  [value]="userData.projectManager"></app-input-box>
                 @if (updateForm.get('projectManager').hasError('required') &&
                 updateForm.get('projectManager').touched) {
                 <span class="text-red-700 text-sm ml-2">Please enter Project Manager Name.</span>
@@ -70,7 +70,7 @@
               <div class="col-md-6">
                 <app-input-box [id]="'projectClient'" [type]="'text'" [formControlName]="'projectClient'"
                   [placeholder]="'Project Client Name'" [title]="'Project Client'"
-                  [value]="userData.project_client"></app-input-box>
+                  [value]="userData.projectClient"></app-input-box>
                 @if (updateForm.get('projectClient').hasError('required') &&
                 updateForm.get('projectClient').touched) {
                 <span class="text-red-700 text-sm ml-2">Please enter Project Client Name.</span>
@@ -82,7 +82,7 @@
             <div class="row">
               <div class="col-md-6">
                 <app-select-dropdown [title]="'Management Tool'" [id]="'mngmtTool'" [formControlName]="'mngmtTool'"
-                  [valueArray]="mngmtOptions" [selectedValue]="userData.management_tool"> </app-select-dropdown>
+                  [valueArray]="mngmtOptions" [selectedValue]="userData.managementTool"> </app-select-dropdown>
                 <!-- @if (addForm.get('mngmtTool').invalid) {
                     <span>Choose please</span>
                     }  -->
@@ -91,7 +91,7 @@
               <div class="col-md-6">
                 <app-input-box [id]="'projectUrl'" [type]="'text'" [formControlName]="'projectUrl'"
                   [placeholder]="'Enter Managemnt URL'" [title]="'Managemnt Tool URL'"
-                  [value]="userData.management_url"></app-input-box>
+                  [value]="userData.managementUrl"></app-input-box>
                 @if (updateForm.get('projectUrl').hasError('required') &&
                 updateForm.get('projectUrl').touched) {
                 <span class="text-red-700 text-sm ml-2">Please enter Managemnt Tool URL.</span>
@@ -106,7 +106,7 @@
 
               <div class="col-md-6">
                 <app-select-dropdown [title]="'Repository Tool'" [id]="'repoTool'" [formControlName]="'repoTool'"
-                  [valueArray]="repoOptions" [selectedValue]="userData.repo_tool"></app-select-dropdown>
+                  [valueArray]="repoOptions" [selectedValue]="userData.repoTool"></app-select-dropdown>
                 <!-- @if (addForm.get('mngmtTool').invalid) {
                       <span>Choose please</span>
                       }  -->
@@ -115,7 +115,7 @@
               <div class="col-md-6">
                 <app-input-box [id]="'repoUrl'" [type]="'text'" [formControlName]="'repoUrl'"
                   [placeholder]="'Enter Repository URL'" [title]="'Repository URL'"
-                  [value]="userData.repo_url"></app-input-box>
+                  [value]="userData.repoUrl"></app-input-box>
                 @if (updateForm.get('repoUrl').hasError('required') &&
                 updateForm.get('repoUrl').touched) {
                 <span class="text-red-700 text-sm ml-2">Please enter Repository URL.</span>
@@ -130,7 +130,7 @@
                 <div class="form-group mb-3">
                   <app-select-dropdown [title]="'Project Status'" [id]="'projectStatus'"
                     [formControlName]="'projectStatus'" [valueArray]="statusOptions"
-                    [selectedValue]="userData.project_status"></app-select-dropdown>
+                    [selectedValue]="userData.projectStatus"></app-select-dropdown>
                   <!-- @if (addForm.get('mngmtTool').invalid) {
                           <span>Choose please</span>
                           }  -->
@@ -139,14 +139,14 @@
               <div class="col-md-4">
 
                 <app-date-picker [title]="'Start Date'" [id]="'startDate'" [formControlName]="'startDate'"
-                  [values]="userData.project_startDate"> </app-date-picker>
+                  [values]="userData.projectStartDate"> </app-date-picker>
 
 
               </div>
               <div class="col-md-4">
 
                 <app-date-picker [title]="'Deadline Date'" [id]="'DeadlineDate'" [formControlName]="'DeadlineDate'"
-                  [values]="userData.project_deadlineDate"> </app-date-picker>
+                  [values]="userData.projectDeadlineDate"> </app-date-picker>
 
 
               </div>

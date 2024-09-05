@@ -230,8 +230,8 @@ export class ListProjectsComponent implements OnInit {
     if (token) {
       this.httpService.getAllProjects(token).subscribe({
         next: (response: any) => {
-          if (response.status) {
-            this.user = response.data[0];
+          if (response.statusCode) {
+            this.user = response.data.projects;
           } else {
             this.toastr.error(response.message);
             this.router.navigate(['/projects']);
@@ -260,8 +260,8 @@ export class ListProjectsComponent implements OnInit {
     if (token) {
       this.httpService.dltProject(projectId).subscribe({
         next: (response: any) => {
-          if (response.status) {
-            this.user = this.user.filter(project => project.project_id !== projectId);
+          if (response.statusCode) {
+            this.user = this.user.filter(project => project.projectId !== projectId);
             this.toastr.success('Project deleted successfully');
           } else {
             this.toastr.error(response.message);
@@ -280,23 +280,23 @@ export class ListProjectsComponent implements OnInit {
   setColumnDefs() {
     this.columnDefs = [
       { headerName: 'Sr No.', valueGetter: 'node.rowIndex + 1', width: 80, sortable: false, filter: false, pinned: 'left', suppressMovable: true },
-      { headerName: 'PROJECT NAME', field: 'project_name' },
-      { headerName: 'PROJECT DESCRIPTION', field: 'project_description' },
-      { headerName: 'PROJECT TECH', field: 'project_tech' },
-      { headerName: 'STATUS', field: 'project_status', filter: true },
-      { headerName: 'PROJECT LEAD', field: 'project_lead' },
-      { headerName: 'PROJECT MANAGER', field: 'project_manager' },
-      { headerName: 'PROJECT CLIENT', field: 'project_client' },
-      { headerName: 'MANAGEMENT TOOL', field: 'management_tool' },
-      { headerName: 'MANAGEMENT URL', field: 'management_url' },
-      { headerName: 'REPOSITORY TOOL', field: 'repo_tool' },
-      { headerName: 'REPOSITORY URL', field: 'repo_url' },
-      { headerName: 'START DATE', field: 'project_startDate' },
-      { headerName: 'DEADLINE DATE', field: 'project_deadlineDate' },
+      { headerName: 'PROJECT NAME', field: 'projectName' },
+      { headerName: 'PROJECT DESCRIPTION', field: 'projectDescription' },
+      { headerName: 'PROJECT TECH', field: 'projectTech' },
+      { headerName: 'STATUS', field: 'projectStatus', filter: true },
+      { headerName: 'PROJECT LEAD', field: 'projectLead' },
+      { headerName: 'PROJECT MANAGER', field: 'projectManager' },
+      { headerName: 'PROJECT CLIENT', field: 'projectClient' },
+      { headerName: 'MANAGEMENT TOOL', field: 'managementTool' },
+      { headerName: 'MANAGEMENT URL', field: 'managementUrl' },
+      { headerName: 'REPOSITORY TOOL', field: 'repoTool' },
+      { headerName: 'REPOSITORY URL', field: 'repoUrl' },
+      { headerName: 'START DATE', field: 'projectStartDate' },
+      { headerName: 'DEADLINE DATE', field: 'projectDeadlineDate' },
       {
         headerName: 'Action',
         cellRenderer: (params: any) => {
-          const projectId = params.data.project_id;
+          const projectId = params.data.projectId;
 
           const updateButton = document.createElement('button');
           updateButton.className = 'btn btn-primary';

@@ -13,9 +13,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     userService.userProfileData().subscribe({
       next:(response: any)=>{
         userService.setProfile({
-          user_first_name: response?.data[0].user_first_name || '',
-          user_last_name: response?.data[0].user_last_name|| '',
-          user_role_id: response?.data[0].user_role_id || '',
+          user_first_name: response?.data.user.userFirstName || '',
+          user_last_name: response?.data.user.userLastName|| '',
+          user_role_id: response?.data.user.userRoleId || '',
         });
       },
     });

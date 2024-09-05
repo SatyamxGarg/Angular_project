@@ -11,12 +11,13 @@ import {
   NG_VALUE_ACCESSOR,
   ControlValueAccessor,
 } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-select-dropdown',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './select-dropdown.component.html',
   styleUrl: './select-dropdown.component.scss',
   providers: [
@@ -47,10 +48,8 @@ export class SelectDropdownComponent implements ControlValueAccessor{
 
   handleInputChange(event:any): void {
     this.value = event.value;
-    
     this.onChange(this.value);
     this.onClick();
-
     this.onTouched();
   }
 

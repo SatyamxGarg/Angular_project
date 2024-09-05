@@ -70,15 +70,15 @@ export class SignupComponent {
     this.loader = true;
 
     const data = {
-      user_first_name: this.signupForm.value.fname,
-      user_last_name: this.signupForm.value.lname,
-      user_email: this.signupForm.value.email,
-      user_password: this.signupForm.value.password
+      userFirstName: this.signupForm.value.fname,
+      userLastName: this.signupForm.value.lname,
+      userEmail: this.signupForm.value.email,
+      userPassword: this.signupForm.value.password
     };
     this.httpService.signupPost(data).subscribe({
       next: (response: any) => {
         this.loader = false;
-        if (!response.status) {
+        if (!response.statusCode) {
           this.toastr.error(response.message)
           return
         }

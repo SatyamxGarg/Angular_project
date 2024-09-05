@@ -6,8 +6,8 @@
             <div class="profile-header d-flex align-items-center mb-4">
               <img src="../../../assets/images/profile/download.jpeg" alt="Profile Image" class="profile-img">
               <div class="profile-info ml-3">
-                <h3 class="mb-0">{{user.user_first_name}} {{user.user_last_name}}</h3>
-                <p class="text-muted" style="margin-left:5px;">{{user.user_email}}</p>
+                <h3 class="mb-0">{{user.user.userFirstName}} {{user.userLastName}}</h3>
+                <p class="text-muted" style="margin-left:5px;">{{user.user.userEmail}}</p>
               </div>
             </div>
             <a [routerLink]="['/profile/update-profile']"><button type="button" class="btn btn-primary edit">Edit</button></a>
@@ -19,39 +19,39 @@
                 <tbody>
                   <tr>
                     <th>First Name</th>
-                    <td>{{user.user_first_name || "NULL"}}</td>
+                    <td>{{user.user.userFirstName || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>Last Name</th>
-                    <td>{{user.user_last_name || "NULL"}}</td>
+                    <td>{{user.user.userLastName || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>Email Address</th>
-                    <td>{{user.user_email || "NULL"}}</td>
+                    <td>{{user.user.userEmail || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>Age</th>
-                    <td>{{user.user_age || "NULL"}}</td>
+                    <td>{{user.user.userAge || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>Gender</th>
-                    <td>{{user.user_gender || "NULL"}}</td>
+                    <td>{{user.user.userGender || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>Phone</th>
-                    <td>{{user.user_phone || "NULL"}}</td>
+                    <td>{{user.user.userPhone || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>Country</th>
-                    <td>{{user.user_country || "NULL"}}</td>
+                    <td>{{user.user.userCountry || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>State</th>
-                    <td>{{user.user_state || "NULL"}}</td>
+                    <td>{{user.user.userState || "NULL"}}</td>
                   </tr>
                   <tr>
                     <th>City</th>
-                    <td>{{user.user_city || "NULL"}}</td>
+                    <td>{{user.user.userCity || "NULL"}}</td>
                   </tr>
                 </tbody>
               </table>

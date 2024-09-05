@@ -80,19 +80,19 @@ export class AddProjectsComponent {
       };
 
       const data = {
-        project_name: this.addForm.value.projectName,
-        project_description: this.addForm.value.projectDesc,
-        project_tech: this.addForm.value.projectTech,
-        project_status: this.addForm.value.status,
-        project_lead: this.addForm.value.projectLead,
-        project_manager: this.addForm.value.projectManager,
-        project_client: this.addForm.value.projectClient,
-        management_tool: this.addForm.value.mngmtTool,
-        management_url: this.addForm.value.projectUrl,
-        repo_tool: this.addForm.value.repoTool,
-        repo_url: this.addForm.value.repoUrl,
-        project_startDate: formatDate(this.addForm.value.startDate),
-        project_deadlineDate: formatDate(this.addForm.value.DeadlineDate),
+        projectName: this.addForm.value.projectName,
+        projectDescription: this.addForm.value.projectDesc,
+        projectTech: this.addForm.value.projectTech,
+        projectStatus: this.addForm.value.status,
+        projectLead: this.addForm.value.projectLead,
+        projectManager: this.addForm.value.projectManager,
+        projectClient: this.addForm.value.projectClient,
+        managementTool: this.addForm.value.mngmtTool,
+        managementUrl: this.addForm.value.projectUrl,
+        repoTool: this.addForm.value.repoTool,
+        repoUrl: this.addForm.value.repoUrl,
+        projectStartDate: formatDate(this.addForm.value.startDate),
+        projectDeadlineDate: formatDate(this.addForm.value.DeadlineDate),
       };
 
       this.httpService.addProject(data).subscribe({
