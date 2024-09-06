@@ -178,7 +178,6 @@ export class UpdateProjectComponent implements OnInit {
         projectStartDate: formatDate(this.updateForm.value.startDate),
         projectDeadlineDate: formatDate(this.updateForm.value.DeadlineDate),
       };
-
       this.httpService.updateProject(this.projectId, data).subscribe({
         next: (response: any) => {
           this.loader = false;

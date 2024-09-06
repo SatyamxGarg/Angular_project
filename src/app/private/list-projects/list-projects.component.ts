@@ -183,7 +183,7 @@
 //   }  
 // }
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpService } from '../../services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -195,7 +195,8 @@ import { ColDef, GridApi, FilterModel } from 'ag-grid-community';
   standalone: true,
   imports: [CommonModule, AgGridAngular],
   templateUrl: './list-projects.component.html',
-  styleUrls: ['./list-projects.component.scss']
+  styleUrls: ['./list-projects.component.scss'],
+  providers: [DatePipe]
 })
 
 export class ListProjectsComponent implements OnInit {
@@ -212,7 +213,8 @@ export class ListProjectsComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -231,8 +233,9 @@ export class ListProjectsComponent implements OnInit {
       this.httpService.getAllProjects(token).subscribe({
         next: (response: any) => {
           if (response.statusCode) {
-            this.user = response.data.projects;
-          } else {
+            this.user = response.data.projects;        
+          } 
+          else {
             this.toastr.error(response.message);
             this.router.navigate(['/projects']);
           }
@@ -278,6 +281,7 @@ export class ListProjectsComponent implements OnInit {
   }
 
   setColumnDefs() {
+    
     this.columnDefs = [
       { headerName: 'Sr No.', valueGetter: 'node.rowIndex + 1', width: 80, sortable: false, filter: false, pinned: 'left', suppressMovable: true },
       { headerName: 'PROJECT NAME', field: 'projectName' },
@@ -291,8 +295,8 @@ export class ListProjectsComponent implements OnInit {
       { headerName: 'MANAGEMENT URL', field: 'managementUrl' },
       { headerName: 'REPOSITORY TOOL', field: 'repoTool' },
       { headerName: 'REPOSITORY URL', field: 'repoUrl' },
-      { headerName: 'START DATE', field: 'projectStartDate' },
-      { headerName: 'DEADLINE DATE', field: 'projectDeadlineDate' },
+      {headerName: 'START DATE', valueGetter: (params) => this.removeTimeStamp(params.data.projectStartDate) },
+      { headerName: 'DEADLINE DATE', valueGetter: (params) => this.removeTimeStamp(params.data.projectDeadlineDate) },
       {
         headerName: 'Action',
         cellRenderer: (params: any) => {
@@ -339,5 +343,10 @@ export class ListProjectsComponent implements OnInit {
       "quickFilterText",
       query,
     );
+  }
+
+  removeTimeStamp(date:string) {
+    const dateObject = new Date(date);  
+    return this.datePipe.transform(dateObject, 'yyyy-MM-dd') || '';
   }
 }

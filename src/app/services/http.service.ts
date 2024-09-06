@@ -6,7 +6,7 @@ import { HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-  baseUrl: string = "http://localhost:8081"
+  baseUrl: string = "http://localhost:8081/api/v1"
 
   constructor(private http: HttpClient) {
 
@@ -28,7 +28,7 @@ export class HttpService {
    }
    updateUserProfile(body:any){
     // return this.http.put("http://localhost/Angular_crud/em_be/api/v1/edit-users/",body); 
-    return this.http.put(this.baseUrl+"/user/update-user",body);
+    return this.http.put(this.baseUrl+"/user/",body);
 
    }
    changePassword(body:any){
@@ -60,11 +60,11 @@ export class HttpService {
    }
    getAllProjects(body:any){
     // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/list-projects/",body); 
-    return this.http.get(this.baseUrl+"/project/list-projects",body);
+    return this.http.get(this.baseUrl+"/project/",body);
    }
    addProject(body:any){
     // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/add-projects/",body); 
-    return this.http.post(this.baseUrl+"/project/add-project",body);
+    return this.http.post(this.baseUrl+"/project/",body);
    }
   //  dltProject(projectId: string) {
   //   let params = new HttpParams().set('projectId', projectId);
@@ -72,20 +72,20 @@ export class HttpService {
   // }
 
   dltProject(projectId: string) {
-    return this.http.delete(`${this.baseUrl}/project/del-project/${projectId}`);
+    return this.http.delete(`${this.baseUrl}/project/${projectId}`);
   }
 
 
   getProjectDetails(body:any,projectId: string){
     // let params = new HttpParams().set('project_id', projectId);
     // return this.http.get("http://localhost/Angular_crud/em_be/api/v1/get-project/", { params });
-    return this.http.get(`${this.baseUrl}/project/get-project/${projectId}`,body);
+    return this.http.get(`${this.baseUrl}/project/${projectId}`,body);
 
   }
   updateProject(projectId: string, body: any) {
     // let params = new HttpParams().set('project_id', projectId);
     // return this.http.put("http://localhost/Angular_crud/em_be/api/v1/update-project/", body, { params });
-    return this.http.put(`${this.baseUrl}/project/update-project/${projectId}`,body);
+    return this.http.put(`${this.baseUrl}/project/${projectId}`,body);
 
 }
 }

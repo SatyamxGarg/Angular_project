@@ -122,7 +122,6 @@ export class UpdateProfileComponent {
     this.httpService.state(data)?.subscribe({
       next: (response: any) => {
         this.stateData = response?.data?.states;
-
         this.stateData =  this.stateData.map((obj:any) => {
           return {value:obj.stateName, display: obj.stateName}
         })
