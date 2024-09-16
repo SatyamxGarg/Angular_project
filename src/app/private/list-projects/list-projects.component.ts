@@ -232,13 +232,14 @@ export class ListProjectsComponent implements OnInit {
     if (token) {
       this.httpService.getAllProjects(token).subscribe({
         next: (response: any) => {
-          if (response.statusCode) {
-            this.user = response.data.projects;        
+          if (response.success) {
+            this.user = response.data.data.projects;        
           } 
           else {
-            this.toastr.error(response.message);
+            this.toastr.error(response.error.message);
             this.router.navigate(['/projects']);
           }
+          
         },
         error: (error) => {
           this.toastr.error(error.error.message);

@@ -78,13 +78,20 @@ export class SignupComponent {
     this.httpService.signupPost(data).subscribe({
       next: (response: any) => {
         this.loader = false;
-        if (!response.statusCode) {
-          this.toastr.error(response.message)
-          return
+        if (!response.success) {
+          this.toastr.error(response.error.message)
+          return;
         }
         localStorage.setItem("token", response.data.token)
         this.toastr.success("Signed Up Successfully")
         this.router.navigate(['/login']);
+        // if (response) {
+        //   // localStorage.setItem("user", JSON.stringify(response)); // Save the user info if needed
+        //   this.toastr.success("Signed Up Successfully");
+        //   this.router.navigate(['/login']);
+        // } else {
+        //   this.toastr.error(response.message);
+        // }
       },
       error: (error) => {
         this.loader = false;

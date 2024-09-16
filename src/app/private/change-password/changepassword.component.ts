@@ -74,8 +74,8 @@ export class ChangePasswordComponent implements OnInit {
     this.httpService.changePassword(data).subscribe({
       next: (response: any) => {
         this.loader = false;
-        if (!response.statusCode) {
-          this.toastr.error(response.message);
+        if (!response.success) {
+          this.toastr.error(response.error.message);
           return;
         }
         this.toastr.success('Password changed successfully');

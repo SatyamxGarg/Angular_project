@@ -71,8 +71,8 @@ export class LoginComponent implements OnInit{
     this.httpService.loginPost(data).subscribe({
       next: (response: any) => {
         this.loader = false;
-        if (!response.statusCode) {
-          this.toastr.error(response.message)
+        if (!response.success) {
+          this.toastr.error(response.error.message);
           return
         }
         localStorage.setItem("token", response.data.token)

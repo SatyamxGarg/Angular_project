@@ -65,7 +65,7 @@ export class UpdateProfileComponent {
     const token = localStorage.getItem("token");
     this.httpService.getUserProfile(token).subscribe({
       next: (response: any) => {
-        this.userData = response.data;
+        this.userData = response.data.data;
         this.UpdateForm()
         this.loading = false;
       },
@@ -85,9 +85,8 @@ export class UpdateProfileComponent {
       userCountry: this.userData.user.userCountry,
       userState: this.userData.user.userState,
       userCity: this.userData.user.userCity
-    });
+    });    
     this.changeCountryData();
-    
   }
 
   /**
@@ -97,7 +96,7 @@ export class UpdateProfileComponent {
   fetchCountryData(): void {
     this.httpService.country().subscribe({
       next: (response: any) => {
-        this.countryList = response?.data?.countries;
+        this.countryList = response?.data?.data?.countries;
         this.countryList =  this.countryList.map((obj:any) => {
           return {value:obj.countryName, display: obj.countryName}
         })
@@ -117,11 +116,10 @@ export class UpdateProfileComponent {
     const value: any = this.updateForm.get('userCountry');
     const data = {
       userCountry: value?.value,
-    };
-   
+    };   
     this.httpService.state(data)?.subscribe({
       next: (response: any) => {
-        this.stateData = response?.data?.states;
+        this.stateData = response?.data?.data?.states;
         this.stateData =  this.stateData.map((obj:any) => {
           return {value:obj.stateName, display: obj.stateName}
         })
@@ -147,7 +145,7 @@ export class UpdateProfileComponent {
     };
     this.httpService.city(data)?.subscribe({
       next: (response: any) => {
-        this.cityData = response?.data?.cities;
+        this.cityData = response?.data?.data?.cities;
         this.cityData =  this.cityData.map((obj:any) => {
           return {value:obj.cityName, display: obj.cityName}
         })

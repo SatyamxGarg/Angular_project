@@ -29,8 +29,8 @@ export class MyprofileComponent implements OnInit {
     if (token) {
       this.httpService.getUserProfile(token).subscribe({
         next: (response: any) => {
-          if (response.statusCode) {
-            this.user = response.data;
+          if (response.success) {
+            this.user = response.data.data;
           } else {
             this.toastr.error(response.message);
             this.router.navigate(['/profile']);

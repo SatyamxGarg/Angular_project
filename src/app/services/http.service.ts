@@ -6,49 +6,54 @@ import { HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-  baseUrl: string = "http://localhost:8081/api/v1"
+  baseUrl: string = " http://127.0.0.1:3000"
+   // http://localhost:8081/api/v1
 
   constructor(private http: HttpClient) {
 
    }
    loginPost(body:any){
-   // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/auth/login/",body);
-   return this.http.post(this.baseUrl+"/auth/login/",body);
+  //  return this.http.post(this.baseUrl+"/auth/login/",body);
+  return this.http.post(`${this.baseUrl}/signin`, body);
    }
 
    signupPost(body:any){
-    // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/auth/signup/",body);
-    return this.http.post(this.baseUrl+"/auth/signup/",body);
-
+    // return this.http.post(this.baseUrl+"/auth/signup/",body);
+    return this.http.post(`${this.baseUrl}/signup`, body);
    }
+
    getUserProfile(body:any){
-    // return this.http.get("http://localhost/Angular_crud/em_be/api/v1/myprofile/",body);   
-    return this.http.get(this.baseUrl+"/user/",body);
- 
+    // return this.http.get(this.baseUrl+"/user/",body);
+    return this.http.get(`${this.baseUrl}/user-details`, body);
    }
    updateUserProfile(body:any){
-    // return this.http.put("http://localhost/Angular_crud/em_be/api/v1/edit-users/",body); 
-    return this.http.put(this.baseUrl+"/user/",body);
-
+    // return this.http.put(this.baseUrl+"/user/",body);
+    return this.http.patch(`${this.baseUrl}/user-details/update`, body);
    }
    changePassword(body:any){
-    // return this.http.put("http://localhost/Angular_crud/em_be/api/v1/changepassword/",body); 
-    return this.http.put(this.baseUrl+"/user/change-password",body);
-
+    // return this.http.put(this.baseUrl+"/user/change-password",body);
+    return this.http.patch(`${this.baseUrl}/change-password`, body);
    }
    country(){
-    // return this.http.get("http://localhost/Angular_crud/em_be/api/v1/country/"); 
-    return this.http.get(this.baseUrl+"/user/get-country");
-
+    // return this.http.get(this.baseUrl+"/user/get-country");
+    return this.http.get(`${this.baseUrl}/countries`);
    }
    state(body:any){
-    // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/state/",body); 
-    return this.http.post(this.baseUrl+"/user/get-state",body);
-
+    // return this.http.post(this.baseUrl+"/user/get-state",body);
+    return this.http.post(`${this.baseUrl}/states`,body);
    }
    city(body:any){
-    // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/city/",body); 
-    return this.http.post(this.baseUrl+"/user/get-city",body);
+    // return this.http.post(this.baseUrl+"/user/get-city",body);
+    return this.http.post(`${this.baseUrl}/cities`,body);
+   }
+   
+   getAllProjects(body:any){
+    // return this.http.get(this.baseUrl+"/project/",body);
+    return this.http.get(`${this.baseUrl}/projects`,body);
+   }
+   addProject(body:any){
+    // return this.http.post(this.baseUrl+"/project/",body);
+    return this.http.post(`${this.baseUrl}/projects/add`,body);
    }
    getAllUsers(body:any){
     return this.http.get("http://localhost/Angular_crud/em_be/api/v1/users/",body); 
@@ -58,21 +63,10 @@ export class HttpService {
     return this.http.post("http://localhost/Angular_crud/em_be/api/v1/edit-data/",body); 
 
    }
-   getAllProjects(body:any){
-    // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/list-projects/",body); 
-    return this.http.get(this.baseUrl+"/project/",body);
-   }
-   addProject(body:any){
-    // return this.http.post("http://localhost/Angular_crud/em_be/api/v1/add-projects/",body); 
-    return this.http.post(this.baseUrl+"/project/",body);
-   }
-  //  dltProject(projectId: string) {
-  //   let params = new HttpParams().set('projectId', projectId);
-  //   // return this.http.delete("http://localhost/Angular_crud/em_be/api/v1/del-projects/", { params });
-  // }
 
   dltProject(projectId: string) {
-    return this.http.delete(`${this.baseUrl}/project/${projectId}`);
+    // return this.http.delete(`${this.baseUrl}/project/${projectId}`);
+    return this.http.delete(`${this.baseUrl}/projects/${projectId}`);
   }
 
 
