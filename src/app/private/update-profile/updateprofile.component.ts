@@ -154,11 +154,9 @@ export class UpdateProfileComponent {
         console.log(err);
       },
     });
-  }
-
+  } 
   onUpdate() {
 
-    console.log("on update running")
     if(this.loader) return
 
     if (this.updateForm.valid) {

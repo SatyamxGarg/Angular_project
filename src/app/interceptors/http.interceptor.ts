@@ -19,8 +19,8 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status == 401 && !error.url?.includes("change-password")) {
-        toast.error('Session expired');
         localStorage.removeItem('token');
+        toast.error('Session expired');
         router.navigate(['/login']);
       }
       return throwError(() => error);

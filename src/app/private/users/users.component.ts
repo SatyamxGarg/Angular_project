@@ -113,7 +113,6 @@ export class UsersComponent implements OnInit {
         next: (response: any) => {
           if (response.status) {
             this.user = response.data[0];
-            console.log(this.user);
           } else {
             this.toastr.error(response.message);
             this.router.navigate(['/profile']);
@@ -138,7 +137,6 @@ export class UsersComponent implements OnInit {
       { headerName: 'GENDER', field: 'user_gender' },
       { headerName: 'PHONE', field: 'user_phone' },
       { headerName: 'E-MAIL', field: 'user_email' },
-     
     ];
   }
 }
